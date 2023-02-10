@@ -125,23 +125,23 @@ def main_gpt3emailgen():
                                                          input_recipient,
                                                          input_style,
                                                          input_contents)
-if email_text != "":
-    st.write('\n')  # add spacing
-    st.subheader('\nYou sound incredibly professional!\n')
-    with st.expander("Introduction", expanded=True):
-        st.markdown(email_text)  #output the results
-        # write the text to a file
-        file = open("introduction.txt", "w")
-        file.write(email_text)
-        file.close()
-        
-        # add a download button
-        if st.button("Download Now"):
-            with open("introduction.txt", "r") as f:
-                st.write("Downloading...")
-                file_download = f.read()
-                b = io.BytesIO(file_download.encode())
-                st.file_downloader("introduction.txt", b, "text/plain")
+    if email_text != "":
+        st.write('\n')  # add spacing
+        st.subheader('\nYou sound incredibly professional!\n')
+        with st.expander("Introduction", expanded=True):
+            st.markdown(email_text)  #output the results
+            # write the text to a file
+            file = open("introduction.txt", "w")
+            file.write(email_text)
+            file.close()
+
+            # add a download button
+            if st.button("Download Now"):
+                with open("introduction.txt", "r") as f:
+                    st.write("Downloading...")
+                    file_download = f.read()
+                    b = io.BytesIO(file_download.encode())
+                    st.file_downloader("introduction.txt", b, "text/plain")
 
 
 if __name__ == '__main__':
