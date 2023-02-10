@@ -129,8 +129,8 @@ def main_gpt3emailgen():
         st.write('\n')  # add spacing
         st.subheader('\nHere you have you Project!\n')
         with st.expander("", expanded=True):
-            st.markdown(email_text)  #output the results
-        st.download_button('Download CSV', email_text)  # Defaults to 'text/plain'
+           
+        st.download_button('Download .txt', email_text)  # Defaults to 'text/plain'
        
         
 
