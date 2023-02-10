@@ -39,7 +39,7 @@ def gen_mail_contents(email_contents):
         input_text = email_contents[topic]
         rephrased_content = openai.Completion.create(
             engine="text-davinci-003",
-            prompt=f"Continue talking about the topics and try to introduce the next point called Convolutional Networks and Keras",
+            prompt=f"Write an introduction for a research paper with the title  {contents_str}, The introduction should provide an overview of the research topic, its significance, and a summary of the contents in the paper and need to has minimum 7 paragraphs.",
             # prompt=f"Rewrite the text to sound professional, elaborate and polite.\nText: {input_text}\nRewritten text:",
             temperature=0.8,
             max_tokens=len(input_text)*5,
