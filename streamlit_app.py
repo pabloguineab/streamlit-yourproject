@@ -88,6 +88,7 @@ def main_gpt3emailgen():
 
         input_c1 = st.text_input('Enter relevant information about the topic down below! (currently 2x seperate topics supported)', 'Title of the Project')
         input_c2 = st.text_input('Enter 10 keywords that you consider relevant to mention in the project', 'Keywords')
+        input_c3 = st.text_input('Copy and Paste the Abstract', 'Abstract or Summary')
 
         email_text = ""  # initialize columns variables
         col1, col2, col3, space, col4 = st.columns([5, 5, 5, 0.5, 5])
