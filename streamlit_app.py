@@ -3,7 +3,7 @@
 import os
 import openai
 import streamlit as st
-
+pip install --upgrade streamlit
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",)
 # Design move app further up and remove top padding
