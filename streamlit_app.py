@@ -83,7 +83,7 @@ def main_gpt3emailgen():
     st.markdown('Generate Accurate & Quality Projects Degree in Just Seconds and get Full Marks This Course')
     st.write('\n')  # add spacing
 
-    st.subheader('\nWhat is your introduction all about?\n')
+    st.subheader('\nWhat is your Project about?\n')
     with st.expander("SECTION - Project Detail Inputs", expanded=True):
 
         input_c1 = st.text_input('Enter relevant information about the topic down below! (currently 2x seperate topics supported)', 'University Degree')
