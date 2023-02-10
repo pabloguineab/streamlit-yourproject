@@ -86,15 +86,15 @@ def main_gpt3emailgen():
     st.subheader('\nWhat is your introduction all about?\n')
     with st.expander("SECTION - Project Detail Inputs", expanded=True):
 
-        input_c1 = st.text_input('Enter relevant information about the topic down below! (currently 2x seperate topics supported)', 'topic 1')
-        input_c2 = st.text_input('', 'topic 2 (optional)')
+        input_c1 = st.text_input('Enter relevant information about the topic down below! (currently 2x seperate topics supported)', 'University Degree')
+        input_c2 = st.text_input('', 'Title of the Project')
 
         email_text = ""  # initialize columns variables
         col1, col2, col3, space, col4 = st.columns([5, 5, 5, 0.5, 5])
         with col1:
-            input_sender = st.text_input('Sender Name', '[rephraise]')
+            input_sender = st.text_input('N.Pages', '60')
         with col2:
-            input_recipient = st.text_input('Recipient Name', '[recipient]')
+            input_recipient = st.text_input('Font', 'Arial')
         with col3:
             input_style = st.selectbox('Citation format',
                                        ('APA', 'IEEE', 'Harvard'),
