@@ -81,8 +81,6 @@ def gen_mail_format(sender, recipient, style, email_contents):
     return email_final_text.get("choices")[0]['text']
 
 
-openai.api_key = "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"
-
 def main_gpt3emailgen():
 
     st.image('img/image_banner.png')  # TITLE and Creator information
