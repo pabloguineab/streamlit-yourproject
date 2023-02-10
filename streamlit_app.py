@@ -4,6 +4,10 @@ import os
 import openai
 import streamlit as st
 
+openai.organization = "org-yTygBzk7ri1EaHjS9hvfMLt8"
+openai.api_key = os.getenv("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")
+openai.Model.list()
+
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",)
 # Design move app further up and remove top padding
@@ -30,11 +34,6 @@ st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
                         footer {visibility: hidden;}</style>"""
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
-
-
-# Connect to OpenAI GPT-3, fetch API key from Streamlit secrets
-openai.api_key = os.getenv("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")
-
 
 def gen_mail_contents(email_contents):
 
