@@ -68,7 +68,7 @@ def gen_mail_format(sender, recipient, style, email_contents):
         prompt=f"Im in the last course of Coumputer Sciences and I am writing my final proyect which title is CNNs & AI systems to detect cancer an I want you to write the Introduction. Pease put the citation in APA format at the end. Your answer needs to have a  minimun of 800 words.\n",
         # prompt=f"Write a professional sounding email text that includes all of the following contents separately.\nThe text needs to be written to adhere to the specified writing styles and abbreviations need to be replaced.\n\nSender: {sender}\nRecipient: {recipient} {contents_str}\nWriting Styles: motivated, formal\n\nEmail Text:",
         temperature=0.8,
-        max_tokens=contents_length*2,
+        max_tokens=10000,
         top_p=0.8,
         best_of=2,
         frequency_penalty=0.0,
