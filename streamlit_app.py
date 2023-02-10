@@ -32,7 +32,8 @@ hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
 
-openai.api_key = "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"
+# Connect to OpenAI GPT-3, fetch API key from Streamlit secrets
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def gen_mail_contents(email_contents):
@@ -80,32 +81,37 @@ def gen_mail_format(sender, recipient, style, email_contents):
     return email_final_text.get("choices")[0]['text']
 
 
+openai.api_key = "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"
+
 def main_gpt3emailgen():
 
     st.image('img/image_banner.png')  # TITLE and Creator information
-    st.markdown('Generate Accurate & Quality Content in Just Seconds and get Full Marks This Course ')
+    st.markdown('Generate professional sounding emails based on your cheap comments - powered by Artificial Intelligence (OpenAI GPT-3)! Implemented by '
+        '[stefanrmmr](https://www.linkedin.com/in/stefanrmmr/) - '
+        'view project source code on '
+        '[GitHub](https://github.com/stefanrmmr/gpt3_email_generator)')
     st.write('\n')  # add spacing
 
     st.subheader('\nWhat is your email all about?\n')
-    with st.expander("SECTION 1 - Project Details", expanded=True):
+    with st.expander("SECTION - Email Input", expanded=True):
 
-        input_c1 = st.text_input('Enter the branch of the project to be developed: Philosophy, Journalism, Education, Science, Engineering, ...', 'Branch of Study')
-        input_c2 = st.text_input('', 'University Degree')
+        input_c1 = st.text_input('Enter email contents down below! (currently 2x seperate topics supported)', 'topic 1')
+        input_c2 = st.text_input('', 'topic 2 (optional)')
 
         email_text = ""  # initialize columns variables
         col1, col2, col3, space, col4 = st.columns([5, 5, 5, 0.5, 5])
         with col1:
-            input_sender = st.text_input('Num.Pages (1p = 750wr)', '[rephraise]')
+            input_sender = st.text_input('Sender Name', '[rephraise]')
         with col2:
-            input_recipient = st.text_input('Font', '[recipient]')
+            input_recipient = st.text_input('Recipient Name', '[recipient]')
         with col3:
-            input_style = st.selectbox('Biblography Format',
-                                       ('APA', 'Harvard', 'IEEE'),
+            input_style = st.selectbox('Writing Style',
+                                       ('formal', 'motivated', 'concerned', 'disappointed'),
                                        index=0)
         with col4:
             st.write("\n")  # add spacing
             st.write("\n")  # add spacing
-            if st.button('Generate Project'):
+            if st.button('Generate Email'):
                 with st.spinner():
 
                     input_contents = []  # let the user input all the data
@@ -131,7 +137,9 @@ def main_gpt3emailgen():
         with st.expander("SECTION - Email Output", expanded=True):
             st.markdown(email_text)  #output the results
 
-
 if __name__ == '__main__':
     # call main function
     main_gpt3emailgen()
+
+
+
