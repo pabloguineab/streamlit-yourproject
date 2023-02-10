@@ -130,7 +130,10 @@ def main_gpt3emailgen():
         st.subheader('\nHere you have you Project!\n')
         with st.expander("", expanded=True):
             st.markdown(email_text)  #output the results
-
+        st.download_button('Download CSV', text_contents)  # Defaults to 'text/plain'
+        with open('myfile.csv') as f:
+           st.download_button('Download TXT', f)  # Defaults to 'text/plain'
+        
 
 if __name__ == '__main__':
     if runtime.exists():
