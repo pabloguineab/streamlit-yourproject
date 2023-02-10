@@ -65,7 +65,7 @@ def gen_mail_format(sender, recipient, style, email_contents):
 
     email_final_text = openai.Completion.create(
         engine="text-davinci-002",
-        prompt=f"Write an Introduction to the topic, put at the end citation in {style} format. Introduction needs to include Content1 and Content2 {contents_str}\n",
+        prompt=f"Write an Introduction about the topic {contents_str}, put the citation in {style} format at the end. Introduction needs to have minimum 800 words.\n",
         # prompt=f"Write a professional sounding email text that includes all of the following contents separately.\nThe text needs to be written to adhere to the specified writing styles and abbreviations need to be replaced.\n\nSender: {sender}\nRecipient: {recipient} {contents_str}\nWriting Styles: motivated, formal\n\nEmail Text:",
         temperature=0.8,
         max_tokens=contents_length*2,
@@ -83,7 +83,7 @@ def main_gpt3emailgen():
     st.markdown('Generate Accurate & Quality Projects Degree in Just Seconds and get Full Marks This Course')
     st.write('\n')  # add spacing
 
-    st.subheader('\nWhat is your email all about?\n')
+    st.subheader('\nWhat is your introduction all about?\n')
     with st.expander("SECTION - Project Detail Inputs", expanded=True):
 
         input_c1 = st.text_input('Enter relevant information about the topic down below! (currently 2x seperate topics supported)', 'topic 1')
