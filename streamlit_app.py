@@ -76,8 +76,6 @@ def gen_mail_format(sender, recipient, style, email_contents):
 
     return email_final_text.get("choices")[0]['text']
 
-export OPENAI_API_KEY="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"
-
 
 def main_gpt3emailgen():
 
