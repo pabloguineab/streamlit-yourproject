@@ -3,6 +3,7 @@
 import os
 import openai
 import streamlit as st
+from streamlit import runtime
 
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",)
@@ -140,7 +141,11 @@ def main_gpt3emailgen():
             st.file_downloader("Download Now", "introduction.txt")
 
 if __name__ == '__main__':
-    # call main function
-    main_gpt3emailgen()
+    if runtime.exists():
+        main_gpt3emailgen()
+    else:
+        sys.argv = ["streamlit", "run", sys.argv[0]]
+        sys.exit(stcli.main())
+    
     
     
