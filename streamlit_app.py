@@ -65,7 +65,7 @@ def gen_mail_format(sender, recipient, style, email_contents):
 
     email_final_text = openai.Completion.create(
         engine="text-davinci-002",
-        prompt=f"Im in the last course of Coumputer Sciences and I am writing my final proyect which title is CNNs & AI systems to detect cancer an I want you to write the Introduction. Pease put the citation in APA format at the end. Your answer needs to have a  minimun of 800 words. Give me references at the end \n",
+        prompt=f"Project Title: Cancer prediction using AI, Area: Medical Sciences, With this information, generate a well-structured introduction that provides an overview of the project and sets the stage for the rest of the project report. \n",
         # prompt=f"Write a professional sounding email text that includes all of the following contents separately.\nThe text needs to be written to adhere to the specified writing styles and abbreviations need to be replaced.\n\nSender: {sender}\nRecipient: {recipient} {contents_str}\nWriting Styles: motivated, formal\n\nEmail Text:",
         temperature=0.8,
         max_tokens=1000,
