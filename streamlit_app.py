@@ -86,8 +86,8 @@ def main_gpt3emailgen():
     st.subheader('\nWhat is your Project about?\n')
     with st.expander("SECTION - Project Detail Inputs", expanded=True):
 
-        input_c1 = st.text_input('Enter relevant information about the topic down below! (currently 2x seperate topics supported)', 'University Degree')
-        input_c2 = st.text_input('', 'Title of the Project')
+        input_c1 = st.text_input('Enter relevant information about the topic down below! (currently 2x seperate topics supported)', 'Title of the Project')
+        input_c2 = st.text_input('Enter 10 keywords that you consider relevant to mention in the project', 'Keywords')
 
         email_text = ""  # initialize columns variables
         col1, col2, col3, space, col4 = st.columns([5, 5, 5, 0.5, 5])
