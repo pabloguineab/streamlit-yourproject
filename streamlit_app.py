@@ -145,7 +145,7 @@ if st.button("Download as text file"):
     st.markdown("# Downloading... please wait", unsafe_allow_html=True)
 
     with open("output.txt", "w") as f:
-        f.write(text)
+        f.write(email_text)
 
     with open("output.txt", "rb") as f:
         st.markdown("# Download complete")
