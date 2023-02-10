@@ -129,12 +129,15 @@ def main_gpt3emailgen():
         st.subheader('\nYou sound incredibly professional!\n')
         with st.expander("Introduction", expanded=True):
             st.markdown(email_text)  #output the results
+            # write the text to a file
+            file = open("introduction.txt", "w")
+            file.write(email_text)
+            file.close()
 
-            # write the text to a text area widget
+            # provide a download button
             st.write('\n')  # add spacing
             st.subheader('Download the Introduction')
-            st.write("Copy and paste the contents of this text area into a text editor and save the file locally.")
-            st.text_area(email_text)
+            st.file_downloader("Download Now", "introduction.txt")
 
 if __name__ == '__main__':
     # call main function
