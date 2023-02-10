@@ -39,7 +39,7 @@ def gen_mail_contents(email_contents):
         input_text = email_contents[topic]
         rephrased_content = openai.Completion.create(
             engine="text-davinci-002",
-            prompt=f"Rewrite the text to be elaborate and polite.\nAbbreviations need to be replaced.\nText: {input_text}\nRewritten text:",
+            prompt=f"Continue talking about the topics and try to introduce the next point called Convolutional Networks and Keras",
             # prompt=f"Rewrite the text to sound professional, elaborate and polite.\nText: {input_text}\nRewritten text:",
             temperature=0.8,
             max_tokens=len(input_text)*3,
