@@ -95,6 +95,9 @@ def main_gpt3emailgen():
             input_sender = st.text_input('N.Pages', '60')
         with col2:
             input_recipient = st.text_input('Font', 'Arial')
+            
+        with col5:
+            input_index = st.text_input('Index', '1.-, 2.- , ...')
         with col3:
             input_style = st.selectbox('Citation format',
                                        ('APA', 'IEEE', 'Harvard'),
