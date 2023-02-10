@@ -139,5 +139,24 @@ if __name__ == '__main__':
         sys.argv = ["streamlit", "run", sys.argv[0]]
         sys.exit(stcli.main())
     
-    
+if st.button("Download as text file"):
+    temp_storage = runtime.get_index_page().encode("utf-8")
+    st.set_page_config(page_title="Download", page_icon=None, layout="wide")
+    st.markdown("# Downloading... please wait", unsafe_allow_html=True)
+
+    with open("output.txt", "w") as f:
+        f.write(text)
+
+    with open("output.txt", "rb") as f:
+        st.markdown("# Download complete")
+        st.write("Click on the following button to start your download:", unsafe_allow_html=True)
+        st.write(
+            st.button(
+                "Download",
+                download_file=f.read(),
+                file_name="output.txt",
+                file_format="txt"
+            ),
+            unsafe_allow_html=True
+        )    
     
