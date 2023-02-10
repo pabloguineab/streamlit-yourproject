@@ -140,7 +140,6 @@ if __name__ == '__main__':
         sys.exit(stcli.main())
     
 if st.button("Download as text file"):
-    st.set_page_config(page_title="Download", page_icon=None, layout="wide")
     st.markdown("# Downloading... please wait", unsafe_allow_html=True)
 
     with open("output.txt", "w") as f:
