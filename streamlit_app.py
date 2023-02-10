@@ -32,6 +32,13 @@ hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
                         footer {visibility: hidden;}</style>"""
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
+def show_pdf(file_path):
+    with open(file_path,"rb") as f:
+        base64_pdf = base64.b64encode(f.read()).decode('utf-8')
+    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="800" height="800" type="application/pdf"></iframe>'
+    st.markdown(pdf_display, unsafe_allow_html=True)
+
+show_pdf('post1-compressed.pdf')
 
 def gen_mail_contents(email_contents):
 
@@ -134,11 +141,13 @@ def main_gpt3emailgen():
             file = open("introduction.txt", "w")
             file.write(email_text)
             file.close()
+        with open("post1-compressed.pdf", "rb") as pdf_file:
+            PDFbyte = pdf_file.read()
 
-            # provide a download button
-            st.write('\n')  # add spacing
-            st.subheader('Download the Introduction')
-            st.file_downloader("Download Now", "introduction.txt")
+        st.download_button(label="Download PDF Tutorial", 
+                data=PDFbyte,
+                file_name="pandas-clean-id-column.pdf",
+                mime='application/octet-stream')
 
 if __name__ == '__main__':
     if runtime.exists():
