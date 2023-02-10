@@ -32,8 +32,7 @@ hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
 
-# Connect to OpenAI GPT-3, fetch API key from Streamlit secrets
-openai.api_key = os.getenv("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")
+openai.api_key = "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"
 
 
 def gen_mail_contents(email_contents):
