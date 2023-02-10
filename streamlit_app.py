@@ -133,7 +133,15 @@ def main_gpt3emailgen():
             # write the text to a file
             file = open("introduction.txt", "w")
             file.write(email_text)
-            file.close()
+            file.close()             
+            # add a download button
+            if st.button("Download Now"):
+                with open("introduction.txt", "r") as f:
+                    st.write("Downloading...")
+                    file_download = f.read()
+                    b = io.BytesIO(file_download.encode())
+                    st.file_downloader("introduction.txt", b, "text/plain")
+
 
 if __name__ == '__main__':
     if runtime.exists():
