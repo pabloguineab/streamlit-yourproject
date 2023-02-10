@@ -65,12 +65,12 @@ def gen_mail_format(sender, recipient, style, email_contents):
 
     email_final_text = openai.Completion.create(
         engine="text-davinci-002",
-        prompt=f"Redacta una introduccion de al menos 7 parrafos para un trabajo academico sabiendo que mi proyecto es titulado HISTORIA DE VIDA ESCOLAR. SU IMPACTO EN LA IDENTIDAD PROFESIONAL DEL DOCENTE y que estudio la carrera de magisterio \n",
+        prompt=f"Write an introduction for a research paper with the title  {contents_str} based on the following table of contents: [Introduction, Terminology, What is CNN, How is CNN different from other methods employed in radiomics?, Building blocks of CNN architecture, Training a network, Data and ground truth labels, Overfitting, Training on a small dataset, Applications in radiology, Challenges and future directions, Conclusion]. The introduction should provide an overview of the research topic, its significance, and a summary of the contents in the paper.\n",
         # prompt=f"Write a professional sounding email text that includes all of the following contents separately.\nThe text needs to be written to adhere to the specified writing styles and abbreviations need to be replaced.\n\nSender: {sender}\nRecipient: {recipient} {contents_str}\nWriting Styles: motivated, formal\n\nEmail Text:",
-        temperature=0.8,
+        temperature=0.9,
         max_tokens= 4000,
         top_p=0.8,
-        best_of=4,
+        best_of=1,
         frequency_penalty=0.0,
         presence_penalty=0.0)
 
