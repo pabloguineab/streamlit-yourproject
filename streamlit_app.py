@@ -141,13 +141,6 @@ def main_gpt3emailgen():
             file = open("introduction.txt", "w")
             file.write(email_text)
             file.close()
-        with open("post1-compressed.pdf", "rb") as pdf_file:
-            PDFbyte = pdf_file.read()
-
-        st.download_button(label="Download PDF Tutorial", 
-                data=PDFbyte,
-                file_name="pandas-clean-id-column.pdf",
-                mime='application/octet-stream')
 
 if __name__ == '__main__':
     if runtime.exists():
