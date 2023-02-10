@@ -4,7 +4,6 @@ import os
 import openai
 import streamlit as st
 
-
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",)
 # Design move app further up and remove top padding
@@ -31,6 +30,7 @@ st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
                         footer {visibility: hidden;}</style>"""
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
+
 
 def gen_mail_contents(email_contents):
 
@@ -65,7 +65,7 @@ def gen_mail_format(sender, recipient, style, email_contents):
 
     email_final_text = openai.Completion.create(
         engine="text-davinci-002",
-        prompt=f"Write an Introduction with citations in {style} format at the end that includes relevat information about {topic}",
+        prompt=f"Write a professional email sounds {style} and includes Content1 and Content2 in that order.\n\nSender: {sender}\nRecipient: {recipient} {contents_str}\n\nEmail Text:",
         # prompt=f"Write a professional sounding email text that includes all of the following contents separately.\nThe text needs to be written to adhere to the specified writing styles and abbreviations need to be replaced.\n\nSender: {sender}\nRecipient: {recipient} {contents_str}\nWriting Styles: motivated, formal\n\nEmail Text:",
         temperature=0.8,
         max_tokens=contents_length*2,
@@ -80,10 +80,7 @@ def gen_mail_format(sender, recipient, style, email_contents):
 def main_gpt3emailgen():
 
     st.image('img/image_banner.png')  # TITLE and Creator information
-    st.markdown('Generate professional sounding emails based on your cheap comments - powered by Artificial Intelligence (OpenAI GPT-3)! Implemented by '
-        '[stefanrmmr](https://www.linkedin.com/in/stefanrmmr/) - '
-        'view project source code on '
-        '[GitHub](https://github.com/stefanrmmr/gpt3_email_generator)')
+    st.markdown('Generate Accurate & Quality Projects Degree in Just Seconds and get Full Marks This Course')
     st.write('\n')  # add spacing
 
     st.subheader('\nWhat is your email all about?\n')
@@ -134,6 +131,3 @@ def main_gpt3emailgen():
 if __name__ == '__main__':
     # call main function
     main_gpt3emailgen()
-
-
-
