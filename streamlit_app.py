@@ -42,7 +42,7 @@ def gen_mail_contents(email_contents):
             prompt=f"Continue talking about the topics and try to introduce the next point called Convolutional Networks and Keras",
             # prompt=f"Rewrite the text to sound professional, elaborate and polite.\nText: {input_text}\nRewritten text:",
             temperature=0.8,
-            max_tokens=len(input_text)*3,
+            max_tokens=len(input_text)*5,
             top_p=0.8,
             best_of=2,
             frequency_penalty=0.0,
@@ -68,9 +68,9 @@ def gen_mail_format(sender, recipient, style, email_contents):
         prompt=f"Project Title: Cancer prediction using AI, Area: Medical Sciences, With this information, generate a well-structured introduction that provides an overview of the project and sets the stage for the rest of the project report. \n",
         # prompt=f"Write a professional sounding email text that includes all of the following contents separately.\nThe text needs to be written to adhere to the specified writing styles and abbreviations need to be replaced.\n\nSender: {sender}\nRecipient: {recipient} {contents_str}\nWriting Styles: motivated, formal\n\nEmail Text:",
         temperature=0.8,
-        max_tokens=1000,
+        max_tokens=len(input_text)*5,
         top_p=0.8,
-        best_of=2,
+        best_of=4,
         frequency_penalty=0.0,
         presence_penalty=0.0)
 
@@ -126,7 +126,7 @@ def main_gpt3emailgen():
     if email_text != "":
         st.write('\n')  # add spacing
         st.subheader('\nYou sound incredibly professional!\n')
-        with st.expander("SECTION - Email Output", expanded=True):
+        with st.expander("Introduction", expanded=True):
             st.markdown(email_text)  #output the results
 
 if __name__ == '__main__':
