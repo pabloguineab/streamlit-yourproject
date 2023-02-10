@@ -129,10 +129,9 @@ def main_gpt3emailgen():
         st.write('\n')  # add spacing
         st.subheader('\nHere you have you Project!\n')
         with st.expander("", expanded=True):
-            st.markdown(email_text)  #output the results
+  #          st.markdown(email_text)  #output the results
         st.download_button('Download CSV', email_text)  # Defaults to 'text/plain'
-        with open('myfile.txt') as f:
-           st.download_button('Download TXT', f)  # Defaults to 'text/plain'
+       
         
 
 if __name__ == '__main__':
@@ -141,4 +140,6 @@ if __name__ == '__main__':
     else:
         sys.argv = ["streamlit", "run", sys.argv[0]]
         sys.exit(stcli.main())
+    
+    
     
