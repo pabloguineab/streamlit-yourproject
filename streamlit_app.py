@@ -68,7 +68,7 @@ def gen_mail_format(sender, recipient, style, email_contents):
         prompt=f"Write an introduction for a research paper with the title  {contents_str}, The introduction should provide an overview of the research topic, its significance, and a summary of the contents in the paper and need to has minimum 7 paragraphs.\n",
         # prompt=f"Write a professional sounding email text that includes all of the following contents separately.\nThe text needs to be written to adhere to the specified writing styles and abbreviations need to be replaced.\n\nSender: {sender}\nRecipient: {recipient} {contents_str}\nWriting Styles: motivated, formal\n\nEmail Text:",
         temperature=0.9,
-        max_tokens= 4000,
+        max_tokens= 3000,
         top_p=0.8,
         best_of=1,
         frequency_penalty=0.0,
