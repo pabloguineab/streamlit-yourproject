@@ -4,9 +4,6 @@ import os
 import openai
 import streamlit as st
 
-openai.organization = "org-yTygBzk7ri1EaHjS9hvfMLt8"
-openai.api_key = os.getenv("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")
-openai.Model.list()
 
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",)
@@ -79,6 +76,8 @@ def gen_mail_format(sender, recipient, style, email_contents):
 
     return email_final_text.get("choices")[0]['text']
 
+openai.organization = "org-yTygBzk7ri1EaHjS9hvfMLt8"
+openai.api_key = os.getenv("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")
 
 def main_gpt3emailgen():
 
