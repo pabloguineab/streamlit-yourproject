@@ -11,9 +11,7 @@ from streamlit_extras.stoggle import stoggle
 
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="YourProject.ai", page_icon="img/rephraise_logo.png",)
-# Design move app further up and remove top padding
-st.markdown('''<style>.css-1egvi7u {margin-top: -4rem;}</style>''',
-    unsafe_allow_html=True)
+
 # Design change hyperlink href link color
 st.markdown('''<style>.css-znku1x a {color: #9d03fc;}</style>''',
     unsafe_allow_html=True)  # darkmode
