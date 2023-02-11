@@ -6,7 +6,9 @@ import streamlit as st
 from streamlit import runtime
 from fpdf import FPDF
 import base64
-
+# --- PATH SETTINGS ---
+THIS_DIR = Path(__file__).parent if "__file__" in locals() else Path.cwd()
+STYLES_DIR = THIS_DIR / "styles"
 
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="YourProject.ai", page_icon="img/rephraise_logo.png",)
@@ -137,11 +139,14 @@ def main_gpt3emailgen():
         pdf = FPDF()  # pdf object
         pdf = FPDF(orientation="P", unit="mm", format="Legal")
         pdf.add_page()
-
+        STRIPE_CHECKOUT = "https://buy.stripe.com/6oEdRj2Jp6I29qw3cd"
         pdf.set_font("Times", "B", 12)
         pdf.set_xy(20.0, 20.0)  # adjust x and y position to set the margins
         pdf.multi_cell(w=170.0, h=5.0, align="L", txt=email_text)  # use multi_cell to wrap the text
-
+        st.markdown(
+            f'<a href={STRIPE_CHECKOUT} class="button">👉 Get the add-in</a>',
+            unsafe_allow_html=True,
+        )
         st.download_button(
             "Download Report",
             data=pdf.output(dest='S').encode('latin-1'),
