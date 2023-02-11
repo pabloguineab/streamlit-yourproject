@@ -138,8 +138,8 @@ def main_gpt3emailgen():
         pdf = FPDF(orientation="P", unit="mm", format="A4")
         pdf.add_page()
 
-        pdf.set_font("Times", "B", 18)
-        pdf.set_xy(1.0, 20)
+        pdf.set_font("Times", "B", 12)
+        pdf.set_xy(10.0, 20)
         pdf.cell(w=5.0, h=5.0, align="L", txt=email_text)
 
         st.download_button(
