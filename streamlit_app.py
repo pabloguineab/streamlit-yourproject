@@ -4,6 +4,8 @@ import os
 import openai
 import streamlit as st
 from streamlit import runtime
+from fpdf import FPDF
+import base64
 
 
 # DESIGN implement changes to the standard streamlit UI/UX
@@ -132,9 +134,20 @@ def main_gpt3emailgen():
     if email_text != "":
         st.write('\n')  # add spacing
         st.subheader('\nDownload your Project\n')       
-        st.download_button('Download Now',email_text)  # Defaults to 'text/plain'
+        pdf = FPDF()  # pdf object
+        pdf = FPDF(orientation="P", unit="mm", format="A4")
+        pdf.add_page()
 
-       
+        pdf.set_font("Times", "B", 18)
+        pdf.set_xy(10.0, 20)
+        pdf.cell(w=75.0, h=5.0, align="L", txt=email_text)
+
+        st.download_button(
+            "Download Report",
+            data=pdf.output(dest='S').encode('latin-1'),
+            file_name="Output.pdf",
+        )
+
         
 
 if __name__ == '__main__':
