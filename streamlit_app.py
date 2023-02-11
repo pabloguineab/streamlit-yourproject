@@ -132,13 +132,11 @@ def main_gpt3emailgen():
     if email_text != "":
         st.write('\n')  # add spacing
         st.subheader('\nDownload your Project\n')       
-        with open("yourpdf.pdf", "rb") as file:
-        btn=st.download_button(
-        label="click me to download pdf",
-        data=file,
-        file_name="dowloaded.pdf",
-        mime="application/octet-stream"
-    )
+            with open("yourpdf.pdf", "rb") as file:
+            btn=st.download_button(
+            label="click me to download pdf",
+            data=file,
+            file_name="dowloaded.pdf" )
       
        
         
