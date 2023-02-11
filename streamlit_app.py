@@ -6,7 +6,9 @@ import streamlit as st
 from streamlit import runtime
 from fpdf import FPDF
 import base64
-from streamlit_extras.stoggle import stoggle, style_metric_cards
+from streamlit_extras.stoggle import stoggle
+from streamlit_extras.metric_cards import style_metric_cards
+
 
 
 
@@ -60,9 +62,9 @@ def gen_mail_contents(email_contents):
 
 
 col1, col2, col3 = st.columns(3)
-col1.metric(label="Gain", value=5000, delta=1000)
-col2.metric(label="Loss", value=5000, delta=-1000)
-col3.metric(label="No Change", value=5000, delta=0)
+col1.metric(label="Students", value=1231, delta=1000)
+col2.metric(label="Projects", value=2327, delta=-1000)
+col3.metric(label="Words", value=32443245, delta=0)
 style_metric_cards()
 
 
