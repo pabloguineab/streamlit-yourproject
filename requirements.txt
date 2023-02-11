@@ -2,4 +2,4 @@ streamlit
 openai
 FPDF
 Pillow==9.3.0
-
+streamlit_extras
