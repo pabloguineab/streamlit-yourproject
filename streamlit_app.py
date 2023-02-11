@@ -8,11 +8,6 @@ from fpdf import FPDF
 import base64
 from streamlit_extras.stoggle import stoggle, style_metric_cards
 
-col1, col2, col3 = st.columns(3)
-col1.metric(label="Gain", value=5000, delta=1000)
-col2.metric(label="Loss", value=5000, delta=-1000)
-col3.metric(label="No Change", value=5000, delta=0)
-style_metric_cards()
 
 
 # DESIGN implement changes to the standard streamlit UI/UX
@@ -64,6 +59,11 @@ def gen_mail_contents(email_contents):
     return email_contents
 
 
+col1, col2, col3 = st.columns(3)
+col1.metric(label="Gain", value=5000, delta=1000)
+col2.metric(label="Loss", value=5000, delta=-1000)
+col3.metric(label="No Change", value=5000, delta=0)
+style_metric_cards()
 
 
 
