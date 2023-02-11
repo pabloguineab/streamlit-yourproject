@@ -1,5 +1,5 @@
 # gpt3 professional email generator by stefanrmmr - version June 2022
-
+from pathlib import Path
 import os
 import openai
 import streamlit as st
