@@ -8,7 +8,6 @@ from fpdf import FPDF
 import base64
 
 
-load_css_file(CSS_FILE)
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="YourProject.ai", page_icon="img/rephraise_logo.png",)
 # Design move app further up and remove top padding
