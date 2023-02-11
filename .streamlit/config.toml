@@ -6,13 +6,13 @@ base = "light"
 
 # Used to style primary interface elements. It's the color displayed most
 # frequently across your app's widgets (slider, checkbox, buttons)
-primaryColor = "#9d03fc" # custom purple
+primaryColor = "#ff4a17" # custom purple
 
 # Background color for the main container.
 # backgroundColor = "rgba(254,248,239,1)"
 
 # Used as the background for most widgets (sidebar, text input etc.)
-# secondaryBackgroundColor =  "#ebd2b9"
+# secondaryBackgroundColor =  "#ff4a17"
 
 # Font color for the page.
 # textColor = "#0072c6"
