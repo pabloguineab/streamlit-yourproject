@@ -9,7 +9,7 @@ import base64
 
 
 # DESIGN implement changes to the standard streamlit UI/UX
-st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",)
+st.set_page_config(page_title="YourProject.ai", page_icon="img/rephraise_logo.png",)
 # Design move app further up and remove top padding
 st.markdown('''<style>.css-1egvi7u {margin-top: -4rem;}</style>''',
     unsafe_allow_html=True)
