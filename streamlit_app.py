@@ -140,7 +140,7 @@ def main_gpt3emailgen():
 
         pdf.set_font("Times", "B", 12)
         pdf.set_xy(20.0, 20.0)  # adjust x and y position to set the margins
-        pdf.multi_cell(w=150.0, h=5.0, align="L", txt=email_text)  # use multi_cell to wrap the text
+        pdf.multi_cell(w=170.0, h=5.0, align="L", txt=email_text)  # use multi_cell to wrap the text
 
         st.download_button(
             "Download Report",
