@@ -135,19 +135,18 @@ def main_gpt3emailgen():
         st.write('\n')  # add spacing
         st.subheader('\nDownload your Project\n')       
         pdf = FPDF()  # pdf object
-        pdf = FPDF(orientation="P", unit="mm", format="A4")
+        pdf = FPDF(orientation="P", unit="mm", format="Legal")
         pdf.add_page()
 
         pdf.set_font("Times", "B", 12)
-        pdf.set_xy(10.0, 20)
-        pdf.cell(w=5.0, h=5.0, align="L", txt=email_text)
+        pdf.set_xy(20.0, 20)  # adjust x and y position to set the margins
+        pdf.cell(w=150.0, h=5.0, align="L", txt=email_text)  # adjust width to fit the legal size page
 
         st.download_button(
             "Download Report",
             data=pdf.output(dest='S').encode('latin-1'),
             file_name="yourproject.pdf",
         )
-
         
 
 if __name__ == '__main__':
