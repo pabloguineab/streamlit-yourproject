@@ -135,18 +135,18 @@ def main_gpt3emailgen():
         st.write('\n')  # add spacing
         st.subheader('\nDownload your Project\n')       
         pdf = FPDF()  # pdf object
-        pdf := fpdf.New("P", "mm", "A4", "")
-        pdf.AddPage()
-        pdf.SetFont("Arial", "B", 16)
-        pdf.Cell(40, 10,email_text)
-        err := pdf.OutputFileAndClose("hello.pdf")
+        pdf = FPDF(orientation="P", unit="mm", format="Legal")
+        pdf.add_page()
+
+        pdf.set_font("Times", "B", 12)
+        pdf.set_xy(20.0, 20.0)  # adjust x and y position to set the margins
+        pdf.multi_cell(w=150.0, h=5.0, align="L", txt=email_text, wrap=True)  # use multi_cell to wrap the text
 
         st.download_button(
             "Download Report",
             data=pdf.output(dest='S').encode('latin-1'),
             file_name="yourproject.pdf",
         )
-        
 
 if __name__ == '__main__':
     if runtime.exists():
