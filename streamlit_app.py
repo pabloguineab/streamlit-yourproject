@@ -11,7 +11,19 @@ THIS_DIR = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 STYLES_DIR = THIS_DIR / "styles"
 CSS_FILE = STYLES_DIR / "main.css"
 
+def load_css_file(css_file_path):
+    with open(css_file_path) as f:
+        return st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
+
+# --- PAGE CONFIG ---
+st.set_page_config(
+    page_title=PRODUCT_NAME,
+    page_icon=":star:",
+    layout="centered",
+    initial_sidebar_state="collapsed",
+)
+load_css_file(CSS_FILE)
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="YourProject.ai", page_icon="img/rephraise_logo.png",)
 # Design move app further up and remove top padding
