@@ -4,7 +4,8 @@ import os
 import openai
 import streamlit as st
 from streamlit import runtime
-from apps.document.models import Document
+
+
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",)
 # Design move app further up and remove top padding
@@ -52,30 +53,6 @@ def gen_mail_contents(email_contents):
         # replace existing topic text with updated
         email_contents[topic] = rephrased_content.get("choices")[0]['text']
     return email_contents
-
-
-
-
-
-
-def gen_pdf():
-    # initialize a Document
-    doc = Document('tmppdf', geometry_options=geometry_options)
-
-    # this is a sample of a document, you could add more sections
-    with doc.create(MiniPage(align='c')):
-        doc.append(LargeText(bold("Title")))
-    
-    # generate the pdf file
-    # this file will be generated at the Streamlit server side under the name *tmppdf.pdf*
-    doc.generate_pdf("tmppdf", clean_tex=False)
-    
-    # Open the file and read it as bytes
-    with open("tmppdf.pdf", "rb") as pdf_file:
-        PDFbyte = pdf_file.read()
-  
-    #  return the bytes object created *PDFbyte*since the data argument in the download button must be string or bytes or file
-    return PDFbyte
 
 
 
@@ -155,11 +132,7 @@ def main_gpt3emailgen():
     if email_text != "":
         st.write('\n')  # add spacing
         st.subheader('\nDownload your Project\n')         
-        st.download_button(label="Download PDF Report",
-                   key='download_pdf_btn',
-                   data=gen_pdf(),
-                   file_name='name_of_your_file.pdf', # this might be changed from browser after pressing on the download button
-                   )  # Defaults to 'text/plain'
+        st.download_button('Download Now',email_text)  # Defaults to 'text/plain'
        
         
 
