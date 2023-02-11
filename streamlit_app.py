@@ -128,7 +128,11 @@ def main_gpt3emailgen():
     if email_text != "":
         st.write('\n')  # add spacing
         st.subheader('\nDownload your Project\n')         
-        st.download_button('Download Now', email_text)  # Defaults to 'text/plain'
+        st.download_button(label="Download PDF Report",
+                   key='download_pdf_btn',
+                   data=gen_pdf(),
+                   file_name='name_of_your_file.pdf', # this might be changed from browser after pressing on the download button
+                   )  # Defaults to 'text/plain'
        
         
 
