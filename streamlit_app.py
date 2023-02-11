@@ -137,7 +137,7 @@ def main_gpt3emailgen():
         pdf = FPDF()  # pdf object
         pdf = FPDF(orientation="P", unit="mm", format="Legal")
         pdf.add_page()
-        STRIPE_CHECKOUT = "https://buy.stripe.com/6oEdRj2Jp6I29qw3cd"
+        STRIPE_CHECKOUT = "https://buy.stripe.com/14kdRQfSS1GEf4s8ww"
         pdf.set_font("Times", "B", 12)
         pdf.set_xy(20.0, 20.0)  # adjust x and y position to set the margins
         pdf.multi_cell(w=170.0, h=5.0, align="L", txt=email_text)  # use multi_cell to wrap the text
