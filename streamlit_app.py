@@ -58,7 +58,11 @@ def gen_mail_contents(email_contents):
     return email_contents
 
 
-
+col1, col2, col3 = st.columns(3)
+col1.metric(label="Gain", value=5000, delta=1000)
+col2.metric(label="Loss", value=5000, delta=-1000)
+col3.metric(label="No Change", value=5000, delta=0)
+style_metric_cards()
 
 
 def gen_mail_format(sender, recipient, style, email_contents):
