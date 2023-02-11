@@ -6,6 +6,7 @@ import streamlit as st
 from streamlit import runtime
 from fpdf import FPDF
 import base64
+from streamlit_extras.stoggle import stoggle
 
 
 # DESIGN implement changes to the standard streamlit UI/UX
@@ -151,12 +152,8 @@ def main_gpt3emailgen():
             file_name="yourproject.pdf",
         )
 
-        from streamlit_extras.stoggle import stoggle
-
-        stoggle(
-            "Click me!",
-            """🥷 Surprise!""",
-        )
+        stoggle("Click me!", """🥷 Surprise!""",)
+        
 if __name__ == '__main__':
     if runtime.exists():
         main_gpt3emailgen()
