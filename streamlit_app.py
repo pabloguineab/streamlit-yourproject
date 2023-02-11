@@ -9,6 +9,8 @@ import base64
 # --- PATH SETTINGS ---
 THIS_DIR = Path(__file__).parent if "__file__" in locals() else Path.cwd()
 STYLES_DIR = THIS_DIR / "styles"
+CSS_FILE = STYLES_DIR / "main.css"
+
 
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="YourProject.ai", page_icon="img/rephraise_logo.png",)
