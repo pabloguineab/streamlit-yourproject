@@ -7,9 +7,6 @@ from streamlit import runtime
 from fpdf import FPDF
 import base64
 from streamlit_extras.stoggle import stoggle
-from streamlit_extras.metric_cards import style_metric_cards
-
-
 
 
 # DESIGN implement changes to the standard streamlit UI/UX
@@ -60,12 +57,6 @@ def gen_mail_contents(email_contents):
         email_contents[topic] = rephrased_content.get("choices")[0]['text']
     return email_contents
 
-
-col1, col2, col3 = st.columns(3)
-col1.metric(label="Students", value=1231, delta=1000)
-col2.metric(label="Projects", value=2327, delta=-1000)
-col3.metric(label="Words", value=32443245, delta=0)
-style_metric_cards()
 
 
 
