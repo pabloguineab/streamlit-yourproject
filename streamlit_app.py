@@ -151,6 +151,12 @@ def main_gpt3emailgen():
             file_name="yourproject.pdf",
         )
 
+        from streamlit_extras.stoggle import stoggle
+
+        stoggle(
+            "Click me!",
+            """🥷 Surprise!""",
+        )
 if __name__ == '__main__':
     if runtime.exists():
         main_gpt3emailgen()
