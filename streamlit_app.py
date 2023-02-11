@@ -127,8 +127,8 @@ def main_gpt3emailgen():
                                                          input_contents)
     if email_text != "":
         st.write('\n')  # add spacing
-        st.subheader('\nDownload your Project about \n', email_contents)         
-        st.download_button('Download .txt', email_text)  # Defaults to 'text/plain'
+        st.subheader('\nDownload your Project\n')         
+        st.download_button('Download Now', email_text)  # Defaults to 'text/plain'
        
         
 
