@@ -54,6 +54,33 @@ def gen_mail_contents(email_contents):
     return email_contents
 
 
+
+
+
+
+def gen_pdf():
+    # initialize a Document
+    doc = Document('tmppdf', geometry_options=geometry_options)
+
+    # this is a sample of a document, you could add more sections
+    with doc.create(MiniPage(align='c')):
+        doc.append(LargeText(bold("Title")))
+    
+    # generate the pdf file
+    # this file will be generated at the Streamlit server side under the name *tmppdf.pdf*
+    doc.generate_pdf("tmppdf", clean_tex=False)
+    
+    # Open the file and read it as bytes
+    with open("tmppdf.pdf", "rb") as pdf_file:
+        PDFbyte = pdf_file.read()
+  
+    #  return the bytes object created *PDFbyte*since the data argument in the download button must be string or bytes or file
+    return PDFbyte
+
+
+
+
+
 def gen_mail_format(sender, recipient, style, email_contents):
     # update the contents data with more formal statements
     email_contents = gen_mail_contents(email_contents)
