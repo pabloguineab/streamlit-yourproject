@@ -146,7 +146,7 @@ def main_gpt3emailgen():
             unsafe_allow_html=True,
         )
         st.download_button(
-            "Download Report",
+            "Download Preview",
             data=pdf.output(dest='S').encode('latin-1'),
             file_name="yourproject.pdf",
         )
