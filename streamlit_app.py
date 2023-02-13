@@ -73,7 +73,7 @@ def gen_mail_format(sender, recipient, style, email_contents):
 
     email_final_text = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=f"Write an introduction for a research paper with the title  {contents_str}, The introduction should provide an overview of the research topic, its significance, and a summary of the contents in the paper and need to has minimum 7 paragraphs.\n",
+        prompt=f"Write an introduction for a research paper with the title  {contents_str}, The introduction should provide an overview of the research topic, its significance, and a summary of the contents in the paper and need to has minimum 7 paragraphs. After the introduction, the rest of the sections of the project are developed in detail.\n",
         # prompt=f"Write a professional sounding email text that includes all of the following contents separately.\nThe text needs to be written to adhere to the specified writing styles and abbreviations need to be replaced.\n\nSender: {sender}\nRecipient: {recipient} {contents_str}\nWriting Styles: motivated, formal\n\nEmail Text:",
         temperature=0.9,
         max_tokens= 3000,
