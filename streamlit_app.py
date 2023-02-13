@@ -48,7 +48,7 @@ def gen_mail_contents(email_contents):
             prompt=f"Write an introduction for a research paper with the title {input_text}, The introduction should provide an overview of the research topic, its significance, and a summary of the contents in the paper and need to has minimum 7 paragraphs. The keywords of the project are {input_text}. After writing the introduction, continue developing the rest of the sections of the project.",
             # prompt=f"Rewrite the text to sound professional, elaborate and polite.\nText: {input_text}\nRewritten text:",
             temperature=0.8,
-            max_tokens=len(input_text)*5,
+            max_tokens=len(input_text)*8,
             top_p=0.8,
             best_of=2,
             frequency_penalty=0.0,
