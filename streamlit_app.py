@@ -116,9 +116,9 @@ def main_gpt3emailgen():
                 with st.spinner():
 
                     input_contents = []  # let the user input all the data
-                    if (input_c1 != "") and (input_c1 != 'topic 1'):
+                    if (input_c1 != "") and (input_c1 != 'Title of the Project'):
                         input_contents.append(str(input_c1))
-                    if (input_c2 != "") and (input_c2 != 'topic 2 (optional)'):
+                    if (input_c2 != "") and (input_c2 != 'Keywords'):
                         input_contents.append(str(input_c2))
 
                     if (len(input_contents) == 0):  # remind user to provide data
@@ -139,7 +139,7 @@ def main_gpt3emailgen():
         pdf = FPDF(orientation="P", unit="mm", format="Legal")
         pdf.add_page()
         STRIPE_CHECKOUT = "https://buy.stripe.com/14kdRQfSS1GEf4s8ww"
-        pdf.set_font("Times", "B", 12)
+        pdf.set_font("Times", 12)
         pdf.set_xy(20.0, 20.0)  # adjust x and y position to set the margins
         pdf.multi_cell(w=170.0, h=5.0, align="L", txt=email_text)  # use multi_cell to wrap the text
         st.markdown(
