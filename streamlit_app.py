@@ -121,7 +121,7 @@ def main_gpt3projectgen():
             pdf = FPDF()
             pdf.add_page()
             pdf.set_font("Arial", size=12)
-            pdf.write(5, project_final_text)
+            pdf.write(5, project__text)
             pdf.output("Project_Output.pdf")
             st.markdown('### Your project has been downloaded! 🎉')
 
