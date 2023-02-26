@@ -107,8 +107,7 @@ def main_gpt3projectgen():
     with st.expander("SECTION - Generated Text", expanded=True):
         st.write(project_text)
 
-
- if project_text != "":
+if project_text != "":
         st.write('\n')  # add spacing
         st.subheader('\nDownload your Project\n')       
         pdf = FPDF()  # pdf object
