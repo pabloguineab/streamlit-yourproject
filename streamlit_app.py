@@ -34,24 +34,30 @@ st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
                         footer {visibility: hidden;}</style>"""
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
-
-
 def gen_project_contents(project_contents):
+
     # iterate through all separate sections
     for section in range(len(project_contents)):
         input_text = project_contents[section]
-        rephrased_content = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=f"Write a section of an academic project on the topic {input_text}, with the title '{project_contents[0]}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
-            temperature=0.8,
-            max_tokens=len(input_text)*5,
-            top_p=0.8,
-            best_of=2,
-            frequency_penalty=0.0,
-            presence_penalty=0.0)
+        rephrased_content = ""
+        while len(rephrased_content) == 0:  # continue generating until non-empty completion is produced
+            response = openai.Completion.create(
+                engine="text-davinci-003",
+                prompt=f"Write a section of an academic project on the topic {input_text}, with the title '{project_contents[0]}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
+                temperature=0.8,
+                max_tokens=len(input_text)*5,
+                top_p=0.8,
+                best_of=2,
+                frequency_penalty=0.0,
+                presence_penalty=0.0,
+                stop=None  # allow completion to continue until max_tokens is reached
+            )
+
+            rephrased_content = response.choices[0].text.strip()
 
         # replace existing section text with updated
-        project_contents[section] = rephrased_content.get("choices")[0]['text']
+        project_contents[section] = rephrased_content
+
     return project_contents
 
 
