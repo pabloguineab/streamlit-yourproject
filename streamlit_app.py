@@ -34,11 +34,11 @@ st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
                         footer {visibility: hidden;}</style>"""
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
-def gen_project_contents(project_contents):
 
-    # iterate through all separate sections
-    for section in range(len(project_contents)):
-        input_text = project_contents[section]
+def gen_project_contents(project_contents):
+    new_contents = []
+    for section in project_contents:
+        input_text = section
         rephrased_content = ""
         while len(rephrased_content) == 0:  # continue generating until non-empty completion is produced
             response = openai.Completion.create(
@@ -56,9 +56,9 @@ def gen_project_contents(project_contents):
             rephrased_content = response.choices[0].text.strip()
 
         # replace existing section text with updated
-        project_contents[section] = rephrased_content
+        new_contents.append(rephrased_content)
 
-    return project_contents
+    return new_contents
 
 
 def gen_project_format(title, sections):
@@ -102,7 +102,11 @@ def main_gpt3projectgen():
         input_conclusion = st.text_input('Conclusion', 'Conclusion')
 
     sections = [input_title, input_section1, input_section2, input_section3, input_section4, input_section5, input_section6, input_section7, input_section8, input_conclusion]
+    sections = [section for section in sections if section]  # remove empty sections
+    split_sections = [sections[i:i+3] for i in range(0, len(sections), 3)]  # split into groups of 3 or less
 
+    project_text = ""
+    
     if st.button('Generate Project'):
         st.balloons()
         st.success('Generating Project!')
