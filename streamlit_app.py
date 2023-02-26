@@ -45,7 +45,7 @@ def gen_project_contents(project_contents):
                 engine="text-davinci-003",
                 prompt=f"Write a section of an academic project on the topic {input_text}, with the title '{project_contents[0]}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
                 temperature=0.8,
-                max_tokens=len(input_text)*6,
+                max_tokens=len(input_text)*4,
                 top_p=0.8,
                 best_of=2,
                 frequency_penalty=0.0,
