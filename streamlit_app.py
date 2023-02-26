@@ -36,10 +36,7 @@ hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
 
-
-
 def gen_project_contents(project_contents):
-
     # iterate through all separate sections
     for section in range(len(project_contents)):
         input_text = project_contents[section]
@@ -61,7 +58,6 @@ def gen_project_contents(project_contents):
 def gen_project_format(title, sections):
     # update the sections data with more formal statements
     sections = gen_project_contents(sections)
-    # st.write(sections)  # view augmented contents
 
     contents_str, contents_length = "", 0
     for section in range(len(sections)):  # aggregate all sections into one
@@ -101,41 +97,24 @@ def main_gpt3projectgen():
 
     sections = [input_title, input_section1, input_section2, input_section3, input_section4, input_section5, input_section6, input_section7, input_section8, input_conclusion]
 
-    project_text = gen_project_format(input_title, sections)
-
-    st.write('\n\n\n\n\n')  # add spacing
-    with st.expander("SECTION - Generated Text", expanded=True):
-        st.write(project_text)
-
-if project_text != "":
+    if st.button('Generate Project'):
+        st.balloons()
+        st.success('Generating Project!')
+        project_final_text = gen_project_format(input_title, sections)
+        st.success('Project Generated!')
         st.write('\n')  # add spacing
-        st.subheader('\nDownload your Project\n')       
-        pdf = FPDF()  # pdf object
-        pdf = FPDF(orientation="P", unit="mm", format="Legal")
-        pdf.add_page()
-        STRIPE_CHECKOUT = "https://buy.stripe.com/5kAdRQbCC70Y2hG8wx"
-        pdf.set_font("Times")
-        pdf.cell(60,10,'Introduction',0,1,'C');
-        pdf.set_xy(20.0, 20.0)  # adjust x and y position to set the margins
-        pdf.multi_cell(w=170.0, h=5.0, align="L", txt=project_text)  # use multi_cell to wrap the text
-        st.markdown(
-            f'<a href={STRIPE_CHECKOUT} class="button">👉 Get Complete Project --> Proceed to payment</a>',
-            unsafe_allow_html=True,
-        )
-        st.download_button(
-            "Download Preview",
-            data=pdf.output(dest='S').encode('latin-1'),
-            file_name="yourproject.pdf",
-        )
+        st.markdown('### Project Preview:\n')
+        st.write(project_final_text)
+        st.write('\n')  # add spacing
+        download_pdf = st.checkbox('Would you like to download your project as a PDF?')
+        if download_pdf:
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("Arial", size=12)
+            pdf.write(5, project_final_text)
+            pdf.output("Project_Output.pdf")
+            st.markdown('### Your project has been downloaded! 🎉')
 
-        stoggle("Click me!", """🥷 Surprise!""",)
-        
+
 if __name__ == '__main__':
-    if runtime.exists():
-        main_gpt3emailgen()
-    else:
-        sys.argv = ["streamlit", "run", sys.argv[0]]
-        sys.exit(stcli.main())
-    
-    
-    
+    main_gpt3projectgen()
