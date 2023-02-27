@@ -151,38 +151,29 @@ def main_gpt3projectgen():
 
     import io
     import base64
-    from PyPDF2 import PdfFileWriter, PdfFileReader
+    if st.button('Download Project'):
+        # Generate PDF
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_xy(0, 0)
+        pdf.set_font('arial', 'B', 13.0)
+        pdf.cell(ln=0, h=5.0, align='L', w=0, txt=input_title, border=0)
+        pdf.ln(20)
+        pdf.set_font('arial', '', 13.0)
+        pdf.multi_cell(0, 5, txt=project_final_text, border=0, align='L')
 
-    if st.button('Generate Project'):
-        st.balloons()
-        st.success('Generating Project!')
-        project_final_text, _ = gen_project_format(input_title, sections)  # extract the string and ignore the status flag
-        st.success('Project Generated!')
-        st.write('\n')  # add spacing
-        st.markdown('### Project Preview:\n')
-        st.write(project_final_text)
+        # Create a memory file
+        mem_file = io.BytesIO()
 
-        if st.button('Download Project'):
-            # Generate PDF
-            pdf_writer = PdfFileWriter()
-            pdf_writer.addPage(pdf_writer.createBlankPage(width=500, height=500))  # Add a blank page
-            pdf_writer.setFont('Helvetica', 18)
-            pdf_writer.drawString(100, 450, input_title)
-            pdf_writer.setFont('Helvetica', 12)
-            pdf_writer.drawString(50, 400, project_final_text)
+        # Write pdf to file
+        pdf.output(mem_file, 'F')
 
-            # Generate PDF file
-            mem_file = io.BytesIO()
-            pdf_writer.write(mem_file)
-            pdf_reader = PdfFileReader(mem_file)
+        # Reset the file pointer to the beginning of the file
+        mem_file.seek(0)
 
-            # Download PDF file
-            stream = io.BytesIO()
-            pdf_reader.write(stream)
-            b64 = base64.b64encode(stream.getvalue()).decode()
-            href = f'<a href="data:application/pdf;base64,{b64}" download="project.pdf">Download Project as PDF</a>'
-            st.markdown(href, unsafe_allow_html=True)
-            st.success('\nProject PDF Generated!')
+        # Download the file
+        st.download_button(label="Download Project as PDF", data=mem_file.getvalue(), file_name="project.pdf", mime="application/pdf")
+        st.success('\nProject PDF Generated!')
 
 if __name__ == '__main__':
     main_gpt3projectgen()
