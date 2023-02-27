@@ -16,7 +16,6 @@ from streamlit import runtime
 from fpdf import FPDF
 import base64
 from streamlit_extras.stoggle import stoggle
-from reportlab.pdfgen import canvas
 
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",layout="wide")
