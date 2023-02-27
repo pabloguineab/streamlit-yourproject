@@ -124,6 +124,8 @@ def gen_project_format(title, sections):
         frequency_penalty=0.0,
         presence_penalty=0.0
     ).choices[0].text.strip()
+    
+    return project_final_text  # Add this line to return project_final_text
 
 def main_gpt3projectgen():
     
