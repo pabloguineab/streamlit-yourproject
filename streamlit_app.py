@@ -162,9 +162,6 @@ def main_gpt3projectgen():
         st.write(project_final_text)
         st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
         
-        if st.button('Download Project'):
-        # Creating export and download link for pdf file.
-        # Generate PDF
         # Generate PDF and get its bytes
         pdf = FPDF()
         pdf.add_page()
