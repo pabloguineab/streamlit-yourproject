@@ -149,8 +149,9 @@ def main_gpt3projectgen():
 
     project_final_text = ""
 
-
     import io
+    import base64
+    from PyPDF2 import PdfFileWriter, PdfFileReader
 
     if st.button('Generate Project'):
         st.balloons()
@@ -160,25 +161,26 @@ def main_gpt3projectgen():
         st.write('\n')  # add spacing
         st.markdown('### Project Preview:\n')
         st.write(project_final_text)
+
         if st.button('Download Project'):
-        # Generate PDF
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_xy(0, 0)
-            pdf.set_font('arial', 'B', 13.0)
-            pdf.cell(ln=0, h=5.0, align='L', w=0, txt=input_title, border=0)
-            pdf.ln(20)
-            pdf.set_font('arial', '', 13.0)
-            pdf.multi_cell(0, 5, txt=project_final_text, border=0, align='L')
+            # Generate PDF
+            pdf_writer = PdfFileWriter()
+            pdf_writer.addPage(pdf_writer.createBlankPage(width=500, height=500))  # Add a blank page
+            pdf_writer.setFont('Helvetica', 18)
+            pdf_writer.drawString(100, 450, input_title)
+            pdf_writer.setFont('Helvetica', 12)
+            pdf_writer.drawString(50, 400, project_final_text)
+
             # Generate PDF file
-            # Create a memory file
             mem_file = io.BytesIO()
-            # Write pdf to file
-            pdf.output(mem_file, 'F')
-            # Get value of the BytesIO object
-            project_file = mem_file.getvalue()
-            encoded_project_file = base64.b64encode(project_file)  # encode as base64
-            href = f'<a href="data:application/octet-stream;base64,{encoded_project_file.decode()}" download="project.pdf">Download Project as PDF</a>'
+            pdf_writer.write(mem_file)
+            pdf_reader = PdfFileReader(mem_file)
+
+            # Download PDF file
+            stream = io.BytesIO()
+            pdf_reader.write(stream)
+            b64 = base64.b64encode(stream.getvalue()).decode()
+            href = f'<a href="data:application/pdf;base64,{b64}" download="project.pdf">Download Project as PDF</a>'
             st.markdown(href, unsafe_allow_html=True)
             st.success('\nProject PDF Generated!')
 
