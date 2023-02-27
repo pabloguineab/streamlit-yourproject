@@ -165,10 +165,10 @@ def main_gpt3projectgen():
             pdf.output("Project_Output.pdf")
 
             with open("Project_Output.pdf", "rb") as f:
-            pdf_bytes = pdf.output(dest='S').encode('latin1')
-            b64 = base64.b64encode(pdf_bytes).decode()
+                pdf_bytes = pdf.output(dest='S').encode('latin1')
+                b64 = base64.b64encode(pdf_bytes).decode()
 
-            st.markdown(f'<a href="data:application/pdf;base64,{b64}" download="{input_title}.pdf">Download Now</a>', unsafe_allow_html=True)
+                st.markdown(f'<a href="data:application/pdf;base64,{b64}" download="{input_title}.pdf">Download Now</a>', unsafe_allow_html=True)
 
 
 if __name__ == '__main__':
