@@ -160,27 +160,22 @@ def main_gpt3projectgen():
         st.markdown('### Project Preview:\n')
         st.write(project_final_text)
         st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
-
+        if st.button('Generate Project'):
         # Generate PDF
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_xy(0, 0)
-        pdf.set_font('arial', 'B', 13.0)
-        pdf.cell(ln=0, h=5.0, align='L', w=0, txt=input_title, border=0)
-        pdf.ln(20)
-        pdf.set_font('arial', '', 13.0)
-        pdf.multi_cell(0, 5, txt=project_final_text, border=0, align='L')
-        # Generate PDF file
-        # Create a memory file
-        mem_file = io.BytesIO()
-        # Write pdf to file
-        pdf.output(mem_file, 'F')
-        # Get value of the BytesIO object
-        project_file = mem_file.getvalue()
-        pdf_bytes = pdf.output(dest='S').encode('latin1')
-        mem_file = io.BytesIO(pdf_bytes)
-        encoded_project_file = base64.b64encode(pdf_bytes).decode('utf-8')
-        st.markdown(f'<a href="data:application/pdf;base64,{encoded_project_file}" download="project.pdf">Download Project as PDF</a>', unsafe_allow_html=True)
-        st.success('\nProject PDF Generated!')
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("Arial", size=12)
+            for line in text:
+                pdf.cell(200, 10, txt=line, ln=1)
+            with open("output.pdf", "wb") as out:
+                pdf.output(out)
+
+            # Display link to download PDF
+            with open("output.pdf", "rb") as f:
+                bytes_data = f.read()
+            b64_data = base64.b64encode(bytes_data).decode()
+            href = f'<a href="data:application/octet-stream;base64,{b64_data}" download="proyecto.pdf">Descargar PDF</a>'
+            st.markdown(href, unsafe_allow_html=True)
+            st.success('\nProject PDF Generated!')
 if __name__ == '__main__':
     main_gpt3projectgen()
