@@ -116,7 +116,7 @@ def gen_project_format(title, sections):
     # concatenate sections into one text
     contents_str = "\n\n".join([f"\n\nSection {i+1}: {section}" for i, section in enumerate(new_sections[1:-1])])
     
-    return contents_str
+    return contents_str, project_final_text
 
 def main_gpt3projectgen():
     
@@ -154,7 +154,7 @@ def main_gpt3projectgen():
         st.write('\n')  # add spacing
         st.markdown('### Project Preview:\n')
         st.write(project_final_text)
-        st.text_area('Generated Text', value=contents_str) # Show the entire generated text without scrolling
+        st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
 
         if st.button('Download Now'):
             # Create a pdf file with the project text.
