@@ -138,7 +138,7 @@ def main_gpt3projectgen():
     sections = [section for section in sections if section]  # remove empty sections
     split_sections = [sections[i:i+3] for i in range(0, len(sections), 3)]  # split into groups of 3 or less
 
-    project_final_text = ""
+    project_final_text = f"{new_sections[0]}\n\n{new_sections[1]}\n\n{contents_str}\n\n{new_sections[-1]}"
 
 
     import io
