@@ -9,7 +9,7 @@ import base64
 from streamlit_extras.stoggle import stoggle
 
 # DESIGN implement changes to the standard streamlit UI/UX
-st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",)
+st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",layout="wide")
 # Design move app further up and remove top padding
 st.markdown('''<style>.css-1egvi7u {margin-top: -4rem;}</style>''',
     unsafe_allow_html=True)
@@ -86,7 +86,7 @@ def gen_project_format(title, sections):
     return project_final_text
 
 def main_gpt3projectgen():
-    st.set_page_config(layout="wide") # Increase the height of the Streamlit window to show the entire generated text
+    
     st.image('img/image_banner.png')  # TITLE and Creator information
     st.markdown('Generate Accurate & Quality Academic Projects in Just Seconds')
     st.write('\n')  # add spacing
