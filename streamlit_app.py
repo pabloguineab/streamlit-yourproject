@@ -156,21 +156,21 @@ def main_gpt3projectgen():
         st.write(project_final_text)
         st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
 
-        if st.button('Download Now'):
-            # Create a pdf file with the project text.
+        export_as_pdf = st.button("Export Report")
+
+        def create_download_link(val, filename):
+            b64 = base64.b64encode(val)  # val looks like b'...'
+            return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="{filename}.pdf">Download file</a>'
+
+        if export_as_pdf:
             pdf = FPDF()
             pdf.add_page()
-            pdf.set_font("Arial", size=12)
-            pdf.write(5, project_final_text)
-            pdf.output("Project_Output.pdf")
+            pdf.set_font('Arial', 'B', 16)
+            pdf.cell(40, 10, project_final_text)
 
-            with open("project_final_text.pdf", "rb") as pdf_file:
-                PDFbyte = pdf_file.read()
+            html = create_download_link(pdf.output(dest="S").encode("latin-1"), "test")
 
-            st.download_button(label="Export_Report",
-                                data=PDFbyte,
-                                file_name="test.pdf",
-                                mime='application/octet-stream')
+            st.markdown(html, unsafe_allow_html=True)
 
 
 if __name__ == '__main__':
