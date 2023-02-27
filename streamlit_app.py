@@ -116,7 +116,6 @@ def gen_project_format(title, sections):
 
     return project_final_text
 
-def main_gpt3projectgen():
     
 def main_gpt3projectgen():
     
