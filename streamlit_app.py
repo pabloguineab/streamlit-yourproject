@@ -155,12 +155,12 @@ def main_gpt3projectgen():
         st.markdown('### Project Preview:\n')
         st.write(project_final_text)
         st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
-        with open("dummy.pdf", "rb") as pdf_file:
+        with open("project_final_text.pdf", "rb") as pdf_file:
             PDFbyte = pdf_file.read()
 
         st.download_button(label="Export_Report",
                             data=PDFbyte,
-                            file_name="test.pdf",
+                            file_name="project_final_text.pdf",
                             mime='application/octet-stream')
 
 
