@@ -44,7 +44,7 @@ def gen_project_contents(project_contents):
             response = openai.Completion.create(
                 engine="text-davinci-003",
                 prompt=f"Write a section of an academic project on the topic {section}, with the title '{project_contents[0]}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
-                temperature=0.8,
+                temperature=0.6,
                 max_tokens=len(input_text)*4,
                 top_p=0.8,
                 best_of=2,
@@ -73,7 +73,7 @@ def gen_project_format(title, sections):
         engine="text-davinci-003",
         prompt=f"Write an academic project with the title '{title}', consisting of the following sections:{contents_str}\n",
         temperature=0.6,
-        max_tokens=2000,
+        max_tokens=4096,
         top_p=0.8,
         best_of=1,
         frequency_penalty=0.0,
