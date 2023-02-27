@@ -66,7 +66,7 @@ def gen_project_format(title, sections):
 
     contents_str, contents_length = "", 0
     for section in range(len(sections)):  # aggregate all sections into one
-        contents_str = contents_str + f"\nSection {section+1}: " + sections[section]
+        contents_str = contents_str + f"\n\nSection {section+1}: " + sections[section]
         contents_length += len(sections[section])  # calc total chars
 
     project_final_text = openai.Completion.create(
