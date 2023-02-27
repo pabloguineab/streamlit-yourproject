@@ -45,7 +45,7 @@ def gen_project_contents(project_contents):
                 engine="text-davinci-003",
                 prompt=f"Write a section of an academic project on the topic {section}, with the title '{project_contents[0]}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
                 temperature=0.6,
-                max_tokens=len(input_text)*4,
+                max_tokens=1024,
                 top_p=0.8,
                 best_of=2,
                 frequency_penalty=0.0,
@@ -93,7 +93,7 @@ def gen_project_format(title, sections):
                 engine="text-davinci-003",
                 prompt=f"Write a section of an academic project on the topic {section}, with the title '{title}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
                 temperature=0.6,
-                max_tokens=2048,
+                max_tokens=1024,
                 top_p=0.8,
                 frequency_penalty=0.0,
                 presence_penalty=0.0
@@ -150,15 +150,15 @@ def main_gpt3projectgen():
         st.success('Project Generated!')
         st.write('\n')  # add spacing
         st.markdown('### Project Preview:\n')
-        st.write(project_final_text)
-        st.text_area('Generated Text', value=project_final_text, height=800) # Show the entire generated text without scrolling
+        st.write(new_sections)
+        st.text_area('Generated Text', value=new_sections, height=800) # Show the entire generated text without scrolling
 
         if st.button('Download Now'):
             # Create a pdf file with the project text.
             pdf = FPDF()
             pdf.add_page()
             pdf.set_font("Arial", size=12)
-            pdf.write(5, project_final_text)
+            pdf.write(5, new_sections)
             pdf.output("Project_Output.pdf")
 
             with open("Project_Output.pdf", "rb") as f:
