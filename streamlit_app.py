@@ -140,15 +140,12 @@ def main_gpt3projectgen():
     sections = [section for section in sections if section]  # remove empty sections
     split_sections = [sections[i:i+3] for i in range(0, len(sections), 3)]  # split into groups of 3 or less
 
-    new_sections = []
-    for section_group in split_sections:
-        generated_sections = gen_project_contents(section_group)
-        new_sections.extend(generated_sections)
+    project_final_text = f"{new_sections[0]}\n\n{new_sections[1]}\n\n{contents_str}\n\n{new_sections[-1]}"
 
-    project_final_text = gen_project_format(input_title, new_sections)
 
-    generate_button = st.button('Generate Project')
-    if generate_button:
+    import io
+
+    if st.button('Generate Project'):
         st.balloons()
         st.success('Generating Project!')
         project_final_text = gen_project_format(input_title, sections)
@@ -173,5 +170,6 @@ def main_gpt3projectgen():
             pdf_base64 = base64.b64encode(pdf_bytes).decode('utf-8')
             href = f'<a href="data:application/pdf;base64,{pdf_base64}" download="Project_Output.pdf">Download Now</a>'
             st.markdown(href, unsafe_allow_html=True)
+
 if __name__ == '__main__':
     main_gpt3projectgen()
