@@ -7,7 +7,7 @@ from streamlit import runtime
 from fpdf import FPDF
 import base64
 from streamlit_extras.stoggle import stoggle
-
+import io
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",layout="wide")
 # Design move app further up and remove top padding
@@ -149,7 +149,7 @@ def main_gpt3projectgen():
     st.text_area('Generated Project', project_final_text, height=600)
 
 
-  import io
+
 
   if st.button('Generate Project'):
         st.balloons()
