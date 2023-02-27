@@ -113,7 +113,7 @@ def main_gpt3projectgen():
     project_final_text = ""
 
 
-import io
+    import io
 
     if st.button('Generate Project'):
         st.balloons()
