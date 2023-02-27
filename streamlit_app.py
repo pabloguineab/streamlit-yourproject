@@ -118,6 +118,8 @@ def gen_project_format(title, sections):
 
 def main_gpt3projectgen():
     
+def main_gpt3projectgen():
+    
     st.image('img/image_banner.png')  # TITLE and Creator information
     st.markdown('Generate Accurate & Quality Academic Projects in Just Seconds')
     st.write('\n')  # add spacing
@@ -146,6 +148,7 @@ def main_gpt3projectgen():
 
     project_final_text = gen_project_format(input_title, new_sections)
 
+    st.button('Generate Project')
     if st.button('Generate Project'):
         st.balloons()
         st.success('Generating Project!')
@@ -171,6 +174,5 @@ def main_gpt3projectgen():
             pdf_base64 = base64.b64encode(pdf_bytes).decode('utf-8')
             href = f'<a href="data:application/pdf;base64,{pdf_base64}" download="Project_Output.pdf">Download Now</a>'
             st.markdown(href, unsafe_allow_html=True)
-
 if __name__ == '__main__':
     main_gpt3projectgen()
