@@ -118,59 +118,59 @@ def gen_project_format(title, sections):
 
 def main_gpt3projectgen():
     
-st.image('img/image_banner.png')  # TITLE and Creator information
-st.markdown('Generate Accurate & Quality Academic Projects in Just Seconds')
-st.write('\n')  # add spacing
-
-st.subheader('\nWhat is your project about?\n')
-with st.expander("SECTION - Project Detail Inputs", expanded=True):
-    input_title = st.text_input('Title of the project', 'My Project Title')
-    input_section1 = st.text_input('Section 1 (Introduction)', 'Introduction')
-    input_section2 = st.text_input('Section 2', '')
-    input_section3 = st.text_input('Section 3', '')
-    input_section4 = st.text_input('Section 4', '')
-    input_section5 = st.text_input('Section 5', '')
-    input_section6 = st.text_input('Section 6', '')
-    input_section7 = st.text_input('Section 7', '')
-    input_section8 = st.text_input('Section 8', '')
-    input_conclusion = st.text_input('Conclusion', 'Conclusion')
-
-sections = [input_title, input_section1, input_section2, input_section3, input_section4, input_section5, input_section6, input_section7, input_section8, input_conclusion]
-sections = [section for section in sections if section]  # remove empty sections
-split_sections = [sections[i:i+3] for i in range(0, len(sections), 3)]  # split into groups of 3 or less
-
-new_sections = []
-for section_group in split_sections:
-    generated_sections = gen_project_contents(section_group)
-    new_sections.extend(generated_sections)
-
-project_final_text = gen_project_format(input_title, new_sections)
-
-if st.button('Generate Project'):
-    st.balloons()
-    st.success('Generating Project!')
-    project_final_text = gen_project_format(input_title, sections)
-    st.success('Project Generated!')
+    st.image('img/image_banner.png')  # TITLE and Creator information
+    st.markdown('Generate Accurate & Quality Academic Projects in Just Seconds')
     st.write('\n')  # add spacing
-    st.markdown('### Project Preview:\n')
-    st.write(project_final_text)
-    st.text_area('Generated Text', value=project_final_text, height=800) # Show the entire generated text without scrolling
 
-    if st.button('Download Now'):
-        # Create a pdf file with the project text.
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        pdf.write(5, project_final_text)
-        pdf.output("Project_Output.pdf")
+    st.subheader('\nWhat is your project about?\n')
+    with st.expander("SECTION - Project Detail Inputs", expanded=True):
+        input_title = st.text_input('Title of the project', 'My Project Title')
+        input_section1 = st.text_input('Section 1 (Introduction)', 'Introduction')
+        input_section2 = st.text_input('Section 2', '')
+        input_section3 = st.text_input('Section 3', '')
+        input_section4 = st.text_input('Section 4', '')
+        input_section5 = st.text_input('Section 5', '')
+        input_section6 = st.text_input('Section 6', '')
+        input_section7 = st.text_input('Section 7', '')
+        input_section8 = st.text_input('Section 8', '')
+        input_conclusion = st.text_input('Conclusion', 'Conclusion')
 
-        with open("Project_Output.pdf", "rb") as f:
-            pdf_bytes = f.read()
+    sections = [input_title, input_section1, input_section2, input_section3, input_section4, input_section5, input_section6, input_section7, input_section8, input_conclusion]
+    sections = [section for section in sections if section]  # remove empty sections
+    split_sections = [sections[i:i+3] for i in range(0, len(sections), 3)]  # split into groups of 3 or less
 
-        # Encode the pdf file to base64
-        pdf_base64 = base64.b64encode(pdf_bytes).decode('utf-8')
-        href = f'<a href="data:application/pdf;base64,{pdf_base64}" download="Project_Output.pdf">Download Now</a>'
-        st.markdown(href, unsafe_allow_html=True)
+    new_sections = []
+    for section_group in split_sections:
+        generated_sections = gen_project_contents(section_group)
+        new_sections.extend(generated_sections)
+
+    project_final_text = gen_project_format(input_title, new_sections)
+
+    if st.button('Generate Project'):
+        st.balloons()
+        st.success('Generating Project!')
+        project_final_text = gen_project_format(input_title, sections)
+        st.success('Project Generated!')
+        st.write('\n')  # add spacing
+        st.markdown('### Project Preview:\n')
+        st.write(project_final_text)
+        st.text_area('Generated Text', value=project_final_text, height=800) # Show the entire generated text without scrolling
+
+        if st.button('Download Now'):
+            # Create a pdf file with the project text.
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("Arial", size=12)
+            pdf.write(5, project_final_text)
+            pdf.output("Project_Output.pdf")
+
+            with open("Project_Output.pdf", "rb") as f:
+                pdf_bytes = f.read()
+
+            # Encode the pdf file to base64
+            pdf_base64 = base64.b64encode(pdf_bytes).decode('utf-8')
+            href = f'<a href="data:application/pdf;base64,{pdf_base64}" download="Project_Output.pdf">Download Now</a>'
+            st.markdown(href, unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main_gpt3projectgen()
