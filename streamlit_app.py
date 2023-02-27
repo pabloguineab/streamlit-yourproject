@@ -105,7 +105,7 @@ def main_gpt3projectgen():
     sections = [section for section in sections if section]  # remove empty sections
     split_sections = [sections[i:i+3] for i in range(0, len(sections), 3)]  # split into groups of 3 or less
 
-    project_text = ""
+    project_final_text = ""
 
     if st.button('Generate Project'):
         st.balloons()
