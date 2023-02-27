@@ -60,7 +60,6 @@ def gen_project_contents(project_contents):
 
     return new_contents
 
-
 def gen_project_format(title, sections):
     # update the sections data with more formal statements
     sections = gen_project_contents(sections)
@@ -85,7 +84,6 @@ def gen_project_format(title, sections):
         project_final_text = "\n".join(sections)
 
     return project_final_text
-
 
 def main_gpt3projectgen():
     st.image('img/image_banner.png')  # TITLE and Creator information
@@ -115,31 +113,30 @@ def main_gpt3projectgen():
     import io
 
     if st.button('Generate Project'):
-        st.balloons()
-        st.success('Generating Project!')
-        project_final_text = gen_project_format(input_title, sections)
-        st.success('Project Generated!')
-        st.write('\n')  # add spacing
-        st.markdown('### Project Preview:\n')
-        st.write(project_final_text)
-        st.write('\n')  # add spacing       
+            st.balloons()
+            st.success('Generating Project!')
+            project_final_text = gen_project_format(input_title, sections)
+            st.success('Project Generated!')
+            st.write('\n')  # add spacing
+            st.markdown('### Project Preview:\n')
+            st.write(project_final_text)
+            st.write('\n')  # add spacing       
 
-        if st.button('Download Now'):
-            # Create a pdf file with the project text.
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_font("Arial", size=12)
-            pdf.write(5, project_final_text)
-            pdf.output("Project_Output.pdf")
+            if st.button('Download Now'):
+                # Create a pdf file with the project text.
+                pdf = FPDF()
+                pdf.add_page()
+                pdf.set_font("Arial", size=12)
+                pdf.write(5, project_final_text)
+                pdf.output("Project_Output.pdf")
 
-            with open("Project_Output.pdf", "rb") as f:
-                pdf_bytes = f.read()
+                with open("Project_Output.pdf", "rb") as f:
+                    pdf_bytes = f.read()
 
-            # Encode the pdf file to base64
-            pdf_base64 = base64.b64encode(pdf_bytes).decode('utf-8')
-            href = f'<a href="data:application/pdf;base64,{pdf_base64}" download="Project_Output.pdf">Download Now</a>'
-            st.markdown(href, unsafe_allow_html=True)
+                # Encode the pdf file to base64
+                pdf_base64 = base64.b64encode(pdf_bytes).decode('utf-8')
+                href = f'<a href="data:application/pdf;base64,{pdf_base64}" download="Project_Output.pdf">Download Now</a>'
+                st.markdown(href, unsafe_allow_html=True)
 
-        
 if __name__ == '__main__':
     main_gpt3projectgen()
