@@ -8,6 +8,15 @@ from fpdf import FPDF
 import base64
 from streamlit_extras.stoggle import stoggle
 import io
+from pathlib import Path
+import os
+import openai
+import streamlit as st
+from streamlit import runtime
+from fpdf import FPDF
+import base64
+from streamlit_extras.stoggle import stoggle
+
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",layout="wide")
 # Design move app further up and remove top padding
@@ -45,7 +54,7 @@ def gen_project_contents(project_contents):
                 engine="text-davinci-003",
                 prompt=f"Write a section of an academic project on the topic {section}, with the title '{project_contents[0]}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
                 temperature=0.6,
-                max_tokens=400,
+                max_tokens=len(input_text)*4,
                 top_p=0.8,
                 best_of=2,
                 frequency_penalty=0.0,
@@ -62,61 +71,29 @@ def gen_project_contents(project_contents):
 
 def gen_project_format(title, sections):
     # update the sections data with more formal statements
-    new_sections = []
-    for i, section in enumerate(sections):
-        if i == 0:  # title
-            new_sections.append(section)
-        elif i == 1:  # introduction
-            intro_text = openai.Completion.create(
-                engine="text-davinci-003",
-                prompt=f"Write an introduction for an academic project on the topic {section}, with the title '{title}'. The introduction should provide background information on the topic and explain why it is important to the project.",
-                temperature=0.6,
-                max_tokens=400,
-                top_p=0.8,
-                frequency_penalty=0.0,
-                presence_penalty=0.0
-            ).choices[0].text.strip()
-            new_sections.append(intro_text)
-        elif i == len(sections) - 1:  # conclusion
-            conclusion_text = openai.Completion.create(
-                engine="text-davinci-003",
-                prompt=f"Write a conclusion for an academic project on the topic {section}, with the title '{title}'. The conclusion should summarize the main points of the project and provide some insights or suggestions for future work.",
-                temperature=0.6,
-                max_tokens=400,
-                top_p=0.8,
-                frequency_penalty=0.0,
-                presence_penalty=0.0
-            ).choices[0].text.strip()
-            new_sections.append(conclusion_text)
-        else:  # other sections
-            section_text = openai.Completion.create(
-                engine="text-davinci-003",
-                prompt=f"Write a section of an academic project on the topic {section}, with the title '{title}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
-                temperature=0.6,
-                max_tokens=400,
-                top_p=0.8,
-                frequency_penalty=0.0,
-                presence_penalty=0.0
-            ).choices[0].text.strip()
-            new_sections.append(section_text)
+    sections = gen_project_contents(sections)
 
-    # concatenate sections into one text
-    contents_str = "\n\n".join([f"\n\nSection {i+1}: {section}" for i, section in enumerate(new_sections[1:-1])])
+    contents_str, contents_length = "", 0
+    for section in range(len(sections)):  # aggregate all sections into one
+        contents_str = contents_str + f"\n\nSection {section+1}: " + sections[section]
+        contents_length += len(sections[section])  # calc total chars
 
-    # generate final project text
     project_final_text = openai.Completion.create(
         engine="text-davinci-003",
-        prompt=f"Write an academic project with the title '{title}'. {new_sections[1]} {contents_str} {new_sections[-1]}",
+        prompt=f"Write an academic project with the title '{title}', consisting of the following sections:{contents_str}\n",
         temperature=0.6,
-        max_tokens=400,
+        max_tokens=2500,
         top_p=0.8,
+        best_of=1,
         frequency_penalty=0.0,
-        presence_penalty=0.0
-    ).choices[0].text.strip()
+        presence_penalty=0.0)
+
+    project_final_text = project_final_text.get("choices")[0]['text']
+    if not project_final_text:
+        project_final_text = "\n".join(sections)
 
     return project_final_text
 
-    
 def main_gpt3projectgen():
     
     st.image('img/image_banner.png')  # TITLE and Creator information
@@ -140,7 +117,7 @@ def main_gpt3projectgen():
     sections = [section for section in sections if section]  # remove empty sections
     split_sections = [sections[i:i+3] for i in range(0, len(sections), 3)]  # split into groups of 3 or less
 
-    project_final_text = f"{new_sections[0]}\n\n{new_sections[1]}\n\n{contents_str}\n\n{new_sections[-1]}"
+    project_final_text = ""
 
 
     import io
