@@ -93,7 +93,7 @@ def gen_project_format(title, sections):
                 engine="text-davinci-003",
                 prompt=f"Write a section of an academic project on the topic {section}, with the title '{title}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
                 temperature=0.6,
-                max_tokens=2048,
+                max_tokens=512,
                 top_p=0.8,
                 frequency_penalty=0.0,
                 presence_penalty=0.0
