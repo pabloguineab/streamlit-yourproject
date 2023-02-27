@@ -162,8 +162,10 @@ def main_gpt3projectgen():
         pdf.write(7, project_final_text)
         output = BytesIO()
         pdf.output(output, 'F')
-        st.markdown("### Get Your Project in PDF Format: ")
-        st.markdown("[Download PDF Here](href=%s, target='_blank')" % get_download_link(output, 'project.pdf'), unsafe_allow_html=True)
+        output.seek(0)
+        st.markdown('### Download Generated Project as PDF:')
+        st.markdown('[Download](' + get_file_download_link(
+            output, 'application/pdf', 'Project_Generated.pdf') + ')', unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main_gpt3projectgen()
