@@ -149,9 +149,9 @@ def main_gpt3projectgen():
     st.text_area('Generated Project', project_final_text, height=600)
 
 
-    import io
+  import io
 
-    if st.button('Generate Project'):
+  if st.button('Generate Project'):
         st.balloons()
         st.success('Generating Project!')
         project_final_text = gen_project_format(input_title, sections)
