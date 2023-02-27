@@ -125,21 +125,21 @@ def main_gpt3projectgen():
             
         if st.button('Download Now'):
         # Create a pdf file with the project text.
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        pdf.write(5, project_final_text)
-        pdf.output("Project_Output.pdf")
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("Arial", size=12)
+            pdf.write(5, project_final_text)
+            pdf.output("Project_Output.pdf")
 
-        with open("Project_Output.pdf", "rb") as f:
-            pdf_bytes = f.read()
+            with open("Project_Output.pdf", "rb") as f:
+                pdf_bytes = f.read()
 
-        st.download_button(
-            label="Download Now",
-            data=pdf_bytes,
-            file_name="Project_Output.pdf",
-            mime="application/pdf",
-        )
+            st.download_button(
+                label="Download Now",
+                data=pdf_bytes,
+                file_name="Project_Output.pdf",
+                mime="application/pdf",
+            )
 
         
 if __name__ == '__main__':
