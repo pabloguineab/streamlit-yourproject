@@ -35,7 +35,6 @@ hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
                         footer {visibility: hidden;}</style>"""
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
-
 def gen_project_contents(project_contents):
     new_contents = []
     for section in project_contents:
@@ -84,7 +83,7 @@ def gen_project_format(title, sections):
     project_final_text = project_final_text.get("choices")[0]['text']
     if not project_final_text:
         project_final_text = "\n".join(sections)
-    
+
     return project_final_text
 
 
