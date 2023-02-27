@@ -113,33 +113,33 @@ def main_gpt3projectgen():
     project_final_text = ""
 
 
-if st.button('Generate Project'):
-    st.balloons()
-    st.success('Generating Project!')
-    project_final_text = gen_project_format(input_title, sections)
-    st.success('Project Generated!')
-    st.write('\n')  # add spacing
-    st.markdown('### Project Preview:\n')
-    st.write(project_final_text)
-    st.write('\n')  # add spacing
+    if st.button('Generate Project'):
+        st.balloons()
+        st.success('Generating Project!')
+        project_final_text = gen_project_format(input_title, sections)
+        st.success('Project Generated!')
+        st.write('\n')  # add spacing
+        st.markdown('### Project Preview:\n')
+        st.write(project_final_text)
+        st.write('\n')  # add spacing
 
-    if st.button('Download Now'):
-        # Create a pdf file with the project text.
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        pdf.write(5, project_final_text)
-        pdf.output("Project_Output.pdf")
+        if st.button('Download Now'):
+            # Create a pdf file with the project text.
+            pdf = FPDF()
+            pdf.add_page()
+            pdf.set_font("Arial", size=12)
+            pdf.write(5, project_final_text)
+            pdf.output("Project_Output.pdf")
 
-        # Read the pdf file as bytes.
-        with open("Project_Output.pdf", "rb") as f:
-            pdf_bytes = f.read()
+            # Read the pdf file as bytes.
+            with open("Project_Output.pdf", "rb") as f:
+                pdf_bytes = f.read()
 
-        b64_pdf = base64.b64encode(pdf_bytes).decode()
+            b64_pdf = base64.b64encode(pdf_bytes).decode()
 
-        href = f'<a href="data:application/octet-stream;base64,{b64_pdf}" download="Project_Output.pdf">Download Now</a>'
+            href = f'<a href="data:application/octet-stream;base64,{b64_pdf}" download="Project_Output.pdf">Download Now</a>'
 
-        st.markdown(href, unsafe_allow_html=True)
+            st.markdown(href, unsafe_allow_html=True)
 
         
 if __name__ == '__main__':
