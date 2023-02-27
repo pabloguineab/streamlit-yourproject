@@ -72,6 +72,7 @@ def gen_project_contents(project_contents):
 def gen_project_format(title, sections):
     # update the sections data with more formal statements
     new_sections = []
+    project_final_text = []  # create an empty list for storing the OpenAI response for each section
     for i, section in enumerate(sections):
         if i == 0:  # title
             new_sections.append(section)
@@ -86,6 +87,7 @@ def gen_project_format(title, sections):
                 presence_penalty=0.0
             ).choices[0].text.strip()
             new_sections.append(intro_text)
+            project_final_text.append(intro_text)  # append the OpenAI response to project_final_text
         elif i == len(sections) - 1:  # conclusion
             conclusion_text = openai.Completion.create(
                 engine="text-davinci-003",
@@ -97,6 +99,7 @@ def gen_project_format(title, sections):
                 presence_penalty=0.0
             ).choices[0].text.strip()
             new_sections.append(conclusion_text)
+            project_final_text.append(conclusion_text)  # append the OpenAI response to project_final_text
         else:  # other sections
             section_text = openai.Completion.create(
                 engine="text-davinci-003",
@@ -108,24 +111,12 @@ def gen_project_format(title, sections):
                 presence_penalty=0.0
             ).choices[0].text.strip()
             new_sections.append(section_text)
+            project_final_text.append(section_text)  # append the OpenAI response to project_final_text
 
     # concatenate sections into one text
     contents_str = "\n\n".join([f"\n\nSection {i+1}: {section}" for i, section in enumerate(new_sections[1:-1])])
-
-    # generate final project text
-    prompt = f"Write an academic project with the title '{title}'. {new_sections[1]} {contents_str} END_OF_PROJECT"
-    project_final_text = ""
-    response = openai.Completion.create(
-        engine="text-davinci-003",
-        prompt=prompt,
-        temperature=0.6,
-        max_tokens=512,
-        top_p=0.8,
-        frequency_penalty=0.0,
-        presence_penalty=0.0
-    ).choices[0].text.strip()
     
-    return project_final_text  # Add this line to return project_final_text
+    return contents_str
 
 def main_gpt3projectgen():
     
@@ -162,15 +153,15 @@ def main_gpt3projectgen():
         st.success('Project Generated!')
         st.write('\n')  # add spacing
         st.markdown('### Project Preview:\n')
-        st.write(project_final_text)
-        st.text_area('Generated Text', value=project_final_text, height=800) # Show the entire generated text without scrolling
+        st.write(contents_str)
+        st.text_area('Generated Text', value=contents_str, height=800) # Show the entire generated text without scrolling
 
         if st.button('Download Now'):
             # Create a pdf file with the project text.
             pdf = FPDF()
             pdf.add_page()
             pdf.set_font("Arial", size=12)
-            pdf.write(5, project_final_text)
+            pdf.write(5, contents_str)
             pdf.output("Project_Output.pdf")
 
             with open("Project_Output.pdf", "rb") as f:
