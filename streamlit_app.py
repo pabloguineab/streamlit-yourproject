@@ -152,36 +152,36 @@ def main_gpt3projectgen():
 
     import io
 
-if st.button('Generate Project'):
-    st.balloons()
-    st.success('Generating Project!')
-    project_final_text, _ = gen_project_format(input_title, sections)  # extract the string and ignore the status flag
-    st.success('Project Generated!')
-    st.write('\n')  # add spacing
-    st.markdown('### Project Preview:\n')
-    st.write(project_final_text)
-    st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
+    if st.button('Generate Project'):
+        st.balloons()
+        st.success('Generating Project!')
+        project_final_text, _ = gen_project_format(input_title, sections)  # extract the string and ignore the status flag
+        st.success('Project Generated!')
+        st.write('\n')  # add spacing
+        st.markdown('### Project Preview:\n')
+        st.write(project_final_text)
+        st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
 
-    # Generate PDF
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_xy(0, 0)
-    pdf.set_font('arial', 'B', 13.0)
-    pdf.cell(ln=0, h=5.0, align='L', w=0, txt=input_title, border=0)
-    pdf.ln(20)
-    pdf.set_font('arial', '', 13.0)
-    pdf.multi_cell(0, 5, txt=project_final_text, border=0, align='L')
-    # Generate PDF file
-    # Create a memory file
-    mem_file = io.BytesIO()
-    # Write pdf to file
-    pdf.output(mem_file, 'F')
-    # Get value of the BytesIO object
-    project_file = mem_file.getvalue()
-    encoded_project_file = base64.b64encode(project_file)  # encode as base64
-    href = f'<a href="data:application/octet-stream;base64,{encoded_project_file.decode()}" download="project.pdf">Download Project as PDF</a>'
-    st.markdown(href, unsafe_allow_html=True)
-    st.success('\nProject PDF Generated!')
+        # Generate PDF
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_xy(0, 0)
+        pdf.set_font('arial', 'B', 13.0)
+        pdf.cell(ln=0, h=5.0, align='L', w=0, txt=input_title, border=0)
+        pdf.ln(20)
+        pdf.set_font('arial', '', 13.0)
+        pdf.multi_cell(0, 5, txt=project_final_text, border=0, align='L')
+        # Generate PDF file
+        # Create a memory file
+        mem_file = io.BytesIO()
+        # Write pdf to file
+        pdf.output(mem_file, 'F')
+        # Get value of the BytesIO object
+        project_file = mem_file.getvalue()
+        encoded_project_file = base64.b64encode(project_file)  # encode as base64
+        href = f'<a href="data:application/octet-stream;base64,{encoded_project_file.decode()}" download="project.pdf">Download Project as PDF</a>'
+        st.markdown(href, unsafe_allow_html=True)
+        st.success('\nProject PDF Generated!')
 
 if __name__ == '__main__':
     main_gpt3projectgen()
