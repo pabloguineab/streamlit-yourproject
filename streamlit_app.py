@@ -113,6 +113,8 @@ def main_gpt3projectgen():
     project_final_text = ""
 
 
+import io
+
     if st.button('Generate Project'):
         st.balloons()
         st.success('Generating Project!')
@@ -122,21 +124,20 @@ def main_gpt3projectgen():
         st.markdown('### Project Preview:\n')
         st.write(project_final_text)
         st.write('\n')  # add spacing       
-            
+
         if st.button('Download Now'):
-        # Create a pdf file with the project text.
+            # Create a pdf file with the project text.
             pdf = FPDF()
             pdf.add_page()
             pdf.set_font("Arial", size=12)
             pdf.write(5, project_final_text)
-            pdf.output("Project_Output.pdf")
 
-            with open("Project_Output.pdf", "rb") as f:
-                pdf_bytes = f.read()
+            pdf_bytes = io.BytesIO()
+            pdf.output(pdf_bytes)
 
             st.download_button(
                 label="Download Now",
-                data=pdf_bytes,
+                data=pdf_bytes.getvalue(),
                 file_name="Project_Output.pdf",
                 mime="application/pdf",
             )
