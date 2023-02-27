@@ -162,17 +162,16 @@ def main_gpt3projectgen():
         pdf.set_font('arial', '', 13.0)
         pdf.multi_cell(0, 5, txt=project_final_text, border=0, align='L')
 
-        # Create a memory file
+        # Generate PDF file
         mem_file = io.BytesIO()
-
-        # Write pdf to file
-        pdf.output(mem_file, 'F')
-
-        # Reset the file pointer to the beginning of the file
-        mem_file.seek(0)
-
-        # Download the file
-        st.download_button(label="Download Project as PDF", data=mem_file.getvalue(), file_name="project.pdf", mime="application/pdf")
+        pdf.output(mem_file)
+        project_file = mem_file.getvalue()
+        with open('project.pdf', 'wb') as f:
+            f.write(project_file)
+        with open('project.pdf', 'rb') as f:
+            contents = f.read()
+        href = f'<a href="data:application/octet-stream;base64,{base64.b64encode(contents).decode()}" download="project.pdf">Download Project as PDF</a>'
+        st.markdown(href, unsafe_allow_html=True)
         st.success('\nProject PDF Generated!')
 
 if __name__ == '__main__':
