@@ -158,16 +158,26 @@ def main_gpt3projectgen():
         
         if st.button('Download Project'):
         # Creating export and download link for pdf file.
+        # Generate PDF
             pdf = FPDF()
             pdf.add_page()
-            pdf.set_font("Arial", size=12)
-            pdf.write(7, project_final_text)
-            output = BytesIO()
-            pdf.output(output, 'F')
-            output.seek(0)
-            st.markdown('### Download Generated Project as PDF:')
-            st.markdown('[Download](' + get_file_download_link(
-                output.read(), 'application/pdf', 'Project_Generated.pdf')[0] + ')', unsafe_allow_html=True)
+            pdf.set_xy(0, 0)
+            pdf.set_font('arial', 'B', 13.0)
+            pdf.cell(ln=0, h=5.0, align='L', w=0, txt=input_title, border=0)
+            pdf.ln(20)
+            pdf.set_font('arial', '', 13.0)
+            pdf.multi_cell(0, 5, txt=project_final_text, border=0, align='L')
+            # Generate PDF file
+            # Create a memory file
+            mem_file = io.BytesIO()
+            # Write pdf to file
+            pdf.output(mem_file, 'PDF')
+            # Get value of the BytesIO object
+            project_file = mem_file.getvalue()
+            encoded_project_file = base64.b64encode(project_file)  # encode as base64
+            st.markdown(f'<a href="data:application/pdf;base64,{encoded_project_file.decode()}" download="project.pdf">Download Project as PDF</a>', unsafe_allow_html=True)  # create download link
+            st.success('\nProject PDF Generated!')
+
 
 if __name__ == '__main__':
     main_gpt3projectgen()
