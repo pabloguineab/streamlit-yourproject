@@ -115,6 +115,7 @@ def gen_project_format(title, sections):
     ).choices[0].text.strip()
 
     return project_final_text
+
 def main_gpt3projectgen():
     
     st.image('img/image_banner.png')  # TITLE and Creator information
@@ -138,7 +139,14 @@ def main_gpt3projectgen():
     sections = [section for section in sections if section]  # remove empty sections
     split_sections = [sections[i:i+3] for i in range(0, len(sections), 3)]  # split into groups of 3 or less
 
-    project_final_text = f"{new_sections[0]}\n\n{new_sections[1]}\n\n{contents_str}\n\n{new_sections[-1]}"
+    new_sections = []
+    for section_group in split_sections:
+        generated_sections = gen_project_contents(section_group)
+        new_sections.extend(generated_sections)
+
+    project_final_text = gen_project_format(input_title, new_sections)
+    st.subheader('\nProject Output\n')
+    st.text_area('Generated Project', project_final_text, height=600)
 
 
     import io
