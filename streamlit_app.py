@@ -177,9 +177,9 @@ def main_gpt3projectgen():
         pdf.output(mem_file, 'F')
         # Get value of the BytesIO object
         project_file = mem_file.getvalue()
-        encoded_project_file = base64.b64encode(project_file)  # encode as base64
-        href = f'<a href="data:application/octet-stream;base64,{encoded_project_file.decode()}" download="project.pdf">Download Project as PDF</a>'
-        st.markdown(href, unsafe_allow_html=True)
+        pdf_bytes = pdf.output(dest='S').encode('latin1')
+        encoded_project_file = base64.b64encode(pdf_bytes).decode('utf-8')
+        st.markdown(f'<a href="data:application/pdf;base64,{encoded_project_file}" download="project.pdf">Download Project as PDF</a>', unsafe_allow_html=True)
         st.success('\nProject PDF Generated!')
 if __name__ == '__main__':
     main_gpt3projectgen()
