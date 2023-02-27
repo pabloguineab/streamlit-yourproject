@@ -118,13 +118,27 @@ def main_gpt3projectgen():
         st.write('\n')  # add spacing
         download_pdf = st.checkbox('Would you like to download your project as a PDF?')
         if download_pdf:
+            # First, we need to create a pdf file with the project text.
+
             pdf = FPDF()
             pdf.add_page()
             pdf.set_font("Arial", size=12)
-            pdf.write(5, project__text)
+            pdf.write(5, project_text)
             pdf.output("Project_Output.pdf")
-            st.markdown('### Your project has been downloaded! 🎉')
 
+            # We then need to encode the pdf file into a base64 string.
 
+            encoded_string = base64.b64encode(open("Project_Output.pdf", "rb").read())
+
+            # We then need to add a button that will generate a download link.
+
+            download_button = st.button("Download")
+            if download_button:
+                # We then need to create a download link which will allow the user to download the pdf file.
+                download_link = f'<a href="data:application/octet-stream;base64,{encoded_string.decode()}" download="Project_Output.pdf">Download Project</a>'
+                # We then need to add the download link to the streamlit page.
+                st.markdown(download_link, unsafe_allow_html=True)
+            
+            
 if __name__ == '__main__':
     main_gpt3projectgen()
