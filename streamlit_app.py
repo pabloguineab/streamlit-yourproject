@@ -102,7 +102,7 @@ def gen_project_format(title, sections):
                 engine="text-davinci-003",
                 prompt=f"Write a section of an academic project on the topic {section}, with the title '{title}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
                 temperature=0.6,
-                max_tokens=1024, # Reduce max_tokens to 1024
+                max_tokens=1024,
                 top_p=0.8,
                 frequency_penalty=0.0,
                 presence_penalty=0.0
@@ -113,24 +113,22 @@ def gen_project_format(title, sections):
     contents_str = "\n\n".join([f"\n\nSection {i+1}: {section}" for i, section in enumerate(new_sections[1:-1])])
 
     # generate final project text
-    project_prompt = f"Write an academic project with the title '{title}'. {new_sections[1]} {contents_str}"
+    prompt = f"Write an academic project with the title '{title}'. {new_sections[1]} {contents_str}"
     project_final_text = ""
-    while len(project_final_text) < 2048:  # set a maximum length for the generated text
+    while len(prompt) > 0:
         response = openai.Completion.create(
             engine="text-davinci-003",
-            prompt=project_prompt,
+            prompt=prompt,
             temperature=0.6,
-            max_tokens=2048 - len(project_final_text),
+            max_tokens=2048,
             top_p=0.8,
             frequency_penalty=0.0,
             presence_penalty=0.0
-        )
-        text = response.choices[0].text.strip()
-        if len(text) == 0:  # no more text to generate
-            break
-        project_final_text += text + "\n"
+        ).choices[0].text.strip()
+        project_final_text += response
+        prompt = response
 
-    return project_final_text.strip()
+    return project_final_text
 
 def main_gpt3projectgen():
     
