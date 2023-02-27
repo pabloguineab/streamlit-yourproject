@@ -154,7 +154,7 @@ def main_gpt3projectgen():
         st.write('\n')  # add spacing
         st.markdown('### Project Preview:\n')
         st.write(project_final_text)
-        st.text_area('Generated Text', value=contents_str, height=800) # Show the entire generated text without scrolling
+        st.text_area('Generated Text', value=contents_str, height=3800) # Show the entire generated text without scrolling
 
         if st.button('Download Now'):
             # Create a pdf file with the project text.
