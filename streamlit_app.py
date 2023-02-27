@@ -80,7 +80,7 @@ def gen_project_format(title, sections):
                 engine="text-davinci-003",
                 prompt=f"Write an introduction for an academic project on the topic {section}, with the title '{title}'. The introduction should provide background information on the topic and explain why it is important to the project.",
                 temperature=0.6,
-                max_tokens=512,
+                max_tokens=400,
                 top_p=0.8,
                 frequency_penalty=0.0,
                 presence_penalty=0.0
@@ -91,7 +91,7 @@ def gen_project_format(title, sections):
                 engine="text-davinci-003",
                 prompt=f"Write a conclusion for an academic project on the topic {section}, with the title '{title}'. The conclusion should summarize the main points of the project and provide some insights or suggestions for future work.",
                 temperature=0.6,
-                max_tokens=512,
+                max_tokens=400,
                 top_p=0.8,
                 frequency_penalty=0.0,
                 presence_penalty=0.0
@@ -102,7 +102,7 @@ def gen_project_format(title, sections):
                 engine="text-davinci-003",
                 prompt=f"Write a section of an academic project on the topic {section}, with the title '{title}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
                 temperature=0.6,
-                max_tokens=1024,
+                max_tokens=400,
                 top_p=0.8,
                 frequency_penalty=0.0,
                 presence_penalty=0.0
@@ -120,7 +120,7 @@ def gen_project_format(title, sections):
             engine="text-davinci-003",
             prompt=prompt,
             temperature=0.6,
-            max_tokens=2048,
+            max_tokens=1024,
             top_p=0.8,
             frequency_penalty=0.0,
             presence_penalty=0.0
