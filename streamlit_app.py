@@ -68,6 +68,12 @@ def gen_project_contents(project_contents):
         new_contents.append(rephrased_content)
 
     return new_contents
+def get_pdf_download_link(pdf_bytes, filename):
+    b64 = base64.b64encode(pdf_bytes).decode("utf-8")
+    href = f'<a href="data:application/octet-stream;base64,{b64}" download="{filename}" target="_blank">Download file</a>'
+    return href
+
+
 
 def gen_project_format(title, sections):
     # update the sections data with more formal statements
@@ -159,25 +165,22 @@ def main_gpt3projectgen():
         if st.button('Download Project'):
         # Creating export and download link for pdf file.
         # Generate PDF
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_xy(0, 0)
-            pdf.set_font('arial', 'B', 13.0)
-            pdf.cell(ln=0, h=5.0, align='L', w=0, txt=input_title, border=0)
-            pdf.ln(20)
-            pdf.set_font('arial', '', 13.0)
-            pdf.multi_cell(0, 5, txt=project_final_text, border=0, align='L')
-            # Generate PDF file
-            # Create a memory file
-            mem_file = io.BytesIO()
-            # Write pdf to file
-            pdf.output(mem_file, 'PDF')
-            # Get value of the BytesIO object
-            project_file = mem_file.getvalue()
-            encoded_project_file = base64.b64encode(project_file)  # encode as base64
-            st.markdown(f'<a href="data:application/pdf;base64,{encoded_project_file.decode()}" target="_blank">Open Project PDF</a>', unsafe_allow_html=True)
-            st.success('\nProject PDF Generated!')
+        # Generate PDF and get its bytes
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_xy(0, 0)
+        pdf.set_font('arial', 'B', 13.0)
+        pdf.cell(ln=0, h=5.0, align='L', w=0, txt=input_title, border=0)
+        pdf.ln(20)
+        pdf.set_font('arial', '', 13.0)
+        pdf.multi_cell(0, 5, txt=project_final_text, border=0, align='L')
 
+        mem_file = io.BytesIO()
+        pdf.output(mem_file, 'F')
+        pdf_bytes = mem_file.getvalue()
+
+        # Display download button
+        st.markdown(get_pdf_download_link(pdf_bytes, "project.pdf"), unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main_gpt3projectgen()
