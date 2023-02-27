@@ -140,11 +140,11 @@ def main_gpt3projectgen():
     split_sections = [sections[i:i+3] for i in range(0, len(sections), 3)]  # split into groups of 3 or less
 
     new_sections = []
-    for section_group in split_sections:
-        generated_sections = gen_project_contents(section_group)
-        new_sections.extend(generated_sections)
+        for section_group in split_sections:
+            generated_sections = gen_project_contents(section_group)
+            new_sections.extend(generated_sections)
 
-    project_final_text = gen_project_format(input_title, new_sections)
+        project_final_text = gen_project_format(input_title, new_sections)
 
 
     if st.button('Generate Project'):
