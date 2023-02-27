@@ -35,6 +35,7 @@ hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
                         footer {visibility: hidden;}</style>"""
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
 
+
 def gen_project_contents(project_contents):
     new_contents = []
     for section in project_contents:
@@ -43,7 +44,7 @@ def gen_project_contents(project_contents):
         while len(rephrased_content) == 0:  # continue generating until non-empty completion is produced
             response = openai.Completion.create(
                 engine="text-davinci-003",
-                prompt=f"Write a section of an academic project on the topic {input_text}, with the title '{project_contents[0]}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
+                prompt=f"Write a section of an academic project on the topic {section}, with the title '{project_contents[0]}'. The section should discuss the topic and its relevance to the project, and it should have at least 5 paragraphs.",
                 temperature=0.8,
                 max_tokens=len(input_text)*4,
                 top_p=0.8,
@@ -80,7 +81,11 @@ def gen_project_format(title, sections):
         frequency_penalty=0.0,
         presence_penalty=0.0)
 
-    return project_final_text.get("choices")[0]['text']
+    project_final_text = project_final_text.get("choices")[0]['text']
+    if not project_final_text:
+        project_final_text = "\n".join(sections)
+    
+    return project_final_text
 
 
 def main_gpt3projectgen():
