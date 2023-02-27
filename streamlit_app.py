@@ -86,6 +86,7 @@ def gen_project_format(title, sections):
     return project_final_text
 
 def main_gpt3projectgen():
+    st.set_page_config(layout="wide") # Increase the height of the Streamlit window to show the entire generated text
     st.image('img/image_banner.png')  # TITLE and Creator information
     st.markdown('Generate Accurate & Quality Academic Projects in Just Seconds')
     st.write('\n')  # add spacing
@@ -119,7 +120,6 @@ def main_gpt3projectgen():
         st.success('Project Generated!')
         st.write('\n')  # add spacing
         st.markdown('### Project Preview:\n')
-        st.set_page_config(layout="wide") # Increase the height of the Streamlit window to show the entire generated text
         st.write(project_final_text)
         st.text_area('Generated Text', value=project_final_text, height=800) # Show the entire generated text without scrolling
 
