@@ -155,7 +155,7 @@ def main_gpt3projectgen():
         st.markdown('### Project Preview:\n')
         st.write(project_final_text)
         st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
-        export_as_pdf = st.button("Download PDF')
+        export_as_pdf = st.button("Download PDF")
         def create_download_link(val, filename):
             b64 = base64.b64encode(val)  # val looks like b'...'
             return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="{filename}.pdf">Download file</a>'
