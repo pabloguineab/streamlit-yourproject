@@ -113,22 +113,17 @@ def gen_project_format(title, sections):
     contents_str = "\n\n".join([f"\n\nSection {i+1}: {section}" for i, section in enumerate(new_sections[1:-1])])
 
     # generate final project text
-    prompt = f"Write an academic project with the title '{title}'. {new_sections[1]} {contents_str}"
+    prompt = f"Write an academic project with the title '{title}'. {new_sections[1]} {contents_str} END_OF_PROJECT"
     project_final_text = ""
-    while len(prompt) > 0:
-        response = openai.Completion.create(
-            engine="text-davinci-003",
-            prompt=prompt,
-            temperature=0.6,
-            max_tokens=512,
-            top_p=0.8,
-            frequency_penalty=0.0,
-            presence_penalty=0.0
-        ).choices[0].text.strip()
-        project_final_text += response
-        prompt = response
-
-    return project_final_text
+    response = openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        temperature=0.6,
+        max_tokens=512,
+        top_p=0.8,
+        frequency_penalty=0.0,
+        presence_penalty=0.0
+    ).choices[0].text.strip()
 
 def main_gpt3projectgen():
     
