@@ -121,25 +121,25 @@ def main_gpt3projectgen():
         st.write('\n')  # add spacing
         st.markdown('### Project Preview:\n')
         st.write(project_final_text)
-        st.write('\n')  # add spacing
-
+        st.write('\n')  # add spacing       
+            
         if st.button('Download Now'):
-            # Create a pdf file with the project text.
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_font("Arial", size=12)
-            pdf.write(5, project_final_text)
-            pdf.output("Project_Output.pdf")
+        # Create a pdf file with the project text.
+        pdf = FPDF()
+        pdf.add_page()
+        pdf.set_font("Arial", size=12)
+        pdf.write(5, project_final_text)
+        pdf.output("Project_Output.pdf")
 
-            # Read the pdf file as bytes.
-            with open("Project_Output.pdf", "rb") as f:
-                pdf_bytes = f.read()
+        with open("Project_Output.pdf", "rb") as f:
+            pdf_bytes = f.read()
 
-            b64_pdf = base64.b64encode(pdf_bytes).decode()
-
-            href = f'<a href="data:application/octet-stream;base64,{b64_pdf}" download="Project_Output.pdf">Download Now</a>'
-
-            st.markdown(href, unsafe_allow_html=True)
+        st.download_button(
+            label="Download Now",
+            data=pdf_bytes,
+            file_name="Project_Output.pdf",
+            mime="application/pdf",
+        )
 
         
 if __name__ == '__main__':
