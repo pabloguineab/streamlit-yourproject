@@ -156,16 +156,26 @@ def main_gpt3projectgen():
         st.write(project_final_text)
         st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
         # Creating export and download link for pdf file.
-        pdf = FPDF()
-        pdf.add_page()
-        pdf.set_font("Arial", size=12)
-        pdf.write(7, project_final_text)
-        output = BytesIO()
-        pdf.output(output)
-        output.seek(0)
-        st.markdown('### Download Generated Project as PDF:')
-        st.markdown('[Download](' + get_file_download_link(
-            output.read(), 'application/pdf', 'Project_Generated.pdf')[0] + ')', unsafe_allow_html=True)
+if st.button('Generate Project'):
+    st.balloons()
+    st.success('Generating Project!')
+    project_final_text, _ = gen_project_format(input_title, sections)  # extract the string and ignore the status flag
+    st.success('Project Generated!')
+    st.write('\n')  # add spacing
+    st.markdown('### Project Preview:\n')
+    st.write(project_final_text)
+    st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
+    # Creating export and download link for pdf file.
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    pdf.write(7, project_final_text)
+    output = BytesIO()
+    pdf.output(output, 'F')
+    output.seek(0)
+    st.markdown('### Download Generated Project as PDF:')
+    st.markdown('[Download](' + get_file_download_link(
+        output.read(), 'application/pdf', 'Project_Generated.pdf')[0] + ')', unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main_gpt3projectgen()
