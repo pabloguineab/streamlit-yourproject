@@ -73,7 +73,7 @@ def gen_project_format(title, sections):
         engine="text-davinci-003",
         prompt=f"Write an academic project with the title '{title}', consisting of the following sections:{contents_str}\n",
         temperature=0.6,
-        max_tokens=3000,
+        max_tokens=2500,
         top_p=0.8,
         best_of=1,
         frequency_penalty=0.0,
