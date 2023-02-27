@@ -165,7 +165,7 @@ def main_gpt3projectgen():
         output.seek(0)
         st.markdown('### Download Generated Project as PDF:')
         st.markdown('[Download](' + get_file_download_link(
-            output.read(), 'application/pdf', 'Project_Generated.pdf') + ')', unsafe_allow_html=True)
+            output.read(), 'application/pdf', 'Project_Generated.pdf')[0] + ')', unsafe_allow_html=True)
 
 if __name__ == '__main__':
     main_gpt3projectgen()
