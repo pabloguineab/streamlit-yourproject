@@ -170,6 +170,6 @@ def main_gpt3projectgen():
         st.write(project_final_text)
         pdf_bytes = generate_pdf(project_title, project_final_text)
         st.markdown(get_pdf_download_link(pdf_bytes, f"{project_title}.pdf"), unsafe_allow_html=True)
-                st.success('\nProject PDF Generated!')
+        st.success('\nProject PDF Generated!')
 if __name__ == '__main__':
     main_gpt3projectgen()
