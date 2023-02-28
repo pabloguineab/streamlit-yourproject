@@ -171,12 +171,12 @@ def main_gpt3projectgen():
             project_final_text = gen_project_format(project_title, project_contents)
         st.write(project_final_text)
         if st.button("Download Project"):
-        # Generar el PDF
-        pdf_bytes = generate_pdf(project_title, project_final_text)
+            # Generar el PDF
+            pdf_bytes = generate_pdf(project_title, project_final_text)
 
-        # Descargar el archivo PDF generado
-        b64 = base64.b64encode(pdf_bytes).decode()
-        href = f'<a href="data:application/octet-stream;base64,{b64}" download="{project_title}.pdf">Download PDF File</a>'
-        st.markdown(href, unsafe_allow_html=True)
+            # Descargar el archivo PDF generado
+            b64 = base64.b64encode(pdf_bytes).decode()
+            href = f'<a href="data:application/octet-stream;base64,{b64}" download="{project_title}.pdf">Download PDF File</a>'
+            st.markdown(href, unsafe_allow_html=True)
 if __name__ == '__main__':
     main_gpt3projectgen()
