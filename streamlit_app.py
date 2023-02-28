@@ -127,7 +127,7 @@ def generate_pdf(project_title, project_contents):
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size=12)
-    pdf.cell(200, 10, txt=project_title, ln=1, align="C")
+    pdf.multi_cell(0, 10, txt=' '.join(project_final_text))
     for section in project_contents:
         pdf.cell(200, 10, txt=section, ln=1)
     return pdf.output(dest='S').encode('latin1')
