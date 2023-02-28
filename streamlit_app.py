@@ -127,10 +127,12 @@ def generate_pdf(project_title, project_contents):
     pdf = FPDF()
     pdf.add_page()
     pdf.set_font("Arial", size=12)
-    pdf.multi_cell(0, 10, txt=' '.join(project_final_text))
+    contents_str, project_final_text = gen_project_format(project_title, project_contents)
+    pdf.multi_cell(0, 10, txt=contents_str)
     for section in project_contents:
         pdf.cell(200, 10, txt=section, ln=1)
-    return pdf.output(dest='S').encode('latin1')
+    pdf_bytes = pdf.output(dest='S').encode('latin1')
+    return pdf_bytes, project_final_text
 
 def main_gpt3projectgen():
     
