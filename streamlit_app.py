@@ -165,7 +165,7 @@ def main_gpt3projectgen():
             pdf = FPDF()
             pdf.add_page()
             pdf.set_font("Arial", size=12)
-            for line in text:
+            for line in project_final_text:
                 pdf.cell(200, 10, txt=line, ln=1)
             with open("output.pdf", "wb") as out:
                 pdf.output(out)
