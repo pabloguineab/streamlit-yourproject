@@ -68,12 +68,11 @@ def gen_project_contents(project_contents):
         new_contents.append(rephrased_content)
 
     return new_contents
+
 def get_pdf_download_link(pdf_bytes, filename):
     b64 = base64.b64encode(pdf_bytes).decode("utf-8")
     href = f'<a href="data:application/octet-stream;base64,{b64}" download="{filename}" target="_blank">Download file</a>'
     return href
-
-
 
 def gen_project_format(title, sections):
     # update the sections data with more formal statements
@@ -123,6 +122,7 @@ def gen_project_format(title, sections):
     contents_str = "\n\n".join([f"\n\nSection {i+1}: {section}" for i, section in enumerate(new_sections[1:-1])])
     
     return contents_str, project_final_text
+
 def generate_pdf(project_title, project_contents):
     pdf = FPDF()
     pdf.add_page()
@@ -131,7 +131,7 @@ def generate_pdf(project_title, project_contents):
     pdf.multi_cell(0, 10, txt=contents_str)
     for section in project_contents:
         pdf.cell(200, 10, txt=section, ln=1)
-    pdf_bytes = pdf.output(dest='S').encode('latin1')
+        pdf_bytes = pdf.output(dest='S').encode('latin1')
     return pdf_bytes, project_final_text
 
 def main_gpt3projectgen():
