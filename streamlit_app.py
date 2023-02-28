@@ -123,6 +123,14 @@ def gen_project_format(title, sections):
     contents_str = "\n\n".join([f"\n\nSection {i+1}: {section}" for i, section in enumerate(new_sections[1:-1])])
     
     return contents_str, project_final_text
+def generate_pdf(project_title, project_contents):
+    pdf = FPDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size=12)
+    pdf.cell(200, 10, txt=project_title, ln=1, align="C")
+    for section in project_contents:
+        pdf.cell(200, 10, txt=section, ln=1)
+    return pdf.output(dest='S').encode('latin1')
 
 def main_gpt3projectgen():
     
@@ -151,31 +159,17 @@ def main_gpt3projectgen():
 
     import io
     import base64
-    if st.button('Generate Project'):
-        st.balloons()
-        st.success('Generating Project!')
-        project_final_text, _ = gen_project_format(input_title, sections)  # extract the string and ignore the status flag
-        st.success('Project Generated!')
-        st.write('\n')  # add spacing
-        st.markdown('### Project Preview:\n')
-        st.write(project_final_text)
-        st.text_area('Generated Text', value=project_final_text) # Show the entire generated text without scrolling
-        if st.button('Download Project'):
-        # Generate PDF
-            pdf = FPDF()
-            pdf.add_page()
-            pdf.set_font("Arial", size=12)
-            for line in text:
-                pdf.cell(200, 10, txt=line, ln=1)
-            with open("output.pdf", "wb") as out:
-                pdf.output(out)
 
-            # Display link to download PDF
-            with open("output.pdf", "rb") as f:
-                bytes_data = f.read()
-            b64_data = base64.b64encode(bytes_data).decode()
-            href = f'<a href="data:application/octet-stream;base64,{b64_data}" download="proyecto.pdf">Descargar PDF</a>'
-            st.markdown(href, unsafe_allow_html=True)
-            st.success('\nProject PDF Generated!')
+    # UI code
+    project_title = st.text_input("Project Title")
+    project_contents = st.text_area("Project Contents (one section per line)").split("\n")
+    if st.button("Generate Project"):
+        with st.spinner(text='Generating project...'):
+            project_contents = gen_project_contents(project_contents)
+            project_final_text = gen_project_format(project_title, project_contents)
+        st.write(project_final_text)
+        pdf_bytes = generate_pdf(project_title, project_final_text)
+        st.markdown(get_pdf_download_link(pdf_bytes, f"{project_title}.pdf"), unsafe_allow_html=True)
+                st.success('\nProject PDF Generated!')
 if __name__ == '__main__':
     main_gpt3projectgen()
