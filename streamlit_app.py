@@ -161,7 +161,7 @@ def main_gpt3projectgen():
 
     import io
     import base64
-
+    import pdfkit
     # UI code
     project_title = st.text_input("Project Title")
     project_contents = st.text_area("Project Contents (one section per line)").split("\n")
@@ -171,12 +171,24 @@ def main_gpt3projectgen():
             project_final_text = gen_project_format(project_title, project_contents)
         st.write(project_final_text)
         if st.button("Download Project"):
-            # Generar el PDF
-            pdf_bytes = generate_pdf(project_title, project_final_text)
+        html = template.render(
+            project_title=project_title,
+            project_final_text=project_final_text,
 
-            # Descargar el archivo PDF generado
-            b64 = base64.b64encode(pdf_bytes).decode()
-            href = f'<a href="data:application/octet-stream;base64,{b64}" download="{project_title}.pdf">Download PDF File</a>'
-            st.markdown(href, unsafe_allow_html=True)
+        )
+
+        pdf = pdfkit.from_string(html, False)
+        st.balloons()
+
+        st.success("🎉 Your project was generated!")
+
+        st.download_button(
+            "⬇️ Download PDF",
+            data=pdf,
+            file_name="project.pdf",
+            mime="application/octet-stream",
+        )
+            
+     
 if __name__ == '__main__':
     main_gpt3projectgen()
