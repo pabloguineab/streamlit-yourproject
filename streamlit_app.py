@@ -16,7 +16,7 @@ from streamlit import runtime
 from fpdf import FPDF
 import base64
 from streamlit_extras.stoggle import stoggle
-
+from jinja2 import Environment, FileSystemLoader, select_autoescape
 # DESIGN implement changes to the standard streamlit UI/UX
 st.set_page_config(page_title="rephraise", page_icon="img/rephraise_logo.png",layout="wide")
 # Design move app further up and remove top padding
@@ -43,6 +43,8 @@ st.markdown(hide_decoration_bar_style, unsafe_allow_html=True)
 hide_streamlit_footer = """<style>#MainMenu {visibility: hidden;}
                         footer {visibility: hidden;}</style>"""
 st.markdown(hide_streamlit_footer, unsafe_allow_html=True)
+env = Environment(loader=FileSystemLoader("."), autoescape=select_autoescape())
+template = env.get_template("invoice_template.html")
 
 def gen_project_contents(project_contents):
     new_contents = []
