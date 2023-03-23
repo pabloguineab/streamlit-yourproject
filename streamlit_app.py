@@ -13,12 +13,12 @@ env = Environment(loader=FileSystemLoader("."), autoescape=select_autoescape())
 template = env.get_template("invoice_template.html")
 
 def generate_pdf(project_title, project_contents):
-    html = template.render(
-        project_title=project_title,
-        project_contents=project_contents,
-    )
-    pdf = pdfkit.from_string(html, False)
-    return pdf
+        html = template.render(
+            project_title=project_title,
+            project_contents=project_contents,
+        )
+        pdf = pdfkit.from_string(html, False)
+        return pdf
 
 def generate_project_section(section_title, project_title, prompt, max_tokens=200):
     response = openai.Completion.create(
