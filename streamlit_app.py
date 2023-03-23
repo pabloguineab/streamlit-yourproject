@@ -35,7 +35,7 @@ def generate_project_section(section_title, project_title, prompt, max_tokens=20
 
 def main():
     st.title("Research Project Generator")
-    st.write("Generate a research project using OpenAI GPT-3 and Streamlit")
+    st.write("Generate a Research Project using YourProject.ai")
 
     project_title = st.text_input("Project Title")
     st.markdown("Enter the titles for the sections you want to include in the project (Introduction, Conclusion, etc.):")
